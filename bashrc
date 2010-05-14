@@ -1,14 +1,14 @@
 # Check for an interactive session
 [ -z "$PS1" ] && return
-export EDITOR=/usr/bin/vim
-#export VISUAL=/usr/bin/gvim
-export EMAIL="Géraud Le Falher <daureg@gmail.com>"
+
 source ~/.bash_aliases
-source /etc/bash_completion
 source /etc/profile
-source /etc/profile.d/autojump.bash
+export EDITOR=/usr/bin/vim
+export EMAIL="Géraud Le Falher <daureg@gmail.com>"
+
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
+
 export PS1="\
 \e[0;32m\D{%a %d %b}\e[m |\
 \e[1;32m \D{%T}\e[m |\
