@@ -1,0 +1,79 @@
+#!/bin/sh
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+DEFAULT_SESSION=xfce
+
+if [ $# == 1 ]
+then
+	SESSION=$1
+else
+	SESSION=$DEFAULT_SESSION
+fi
+
+#aplay -q $HOME/.sounds/startup.wav &
+fbsetbg -a -r $HOME/data/wallpapers
+
+# merge in defaults and keymaps
+if [ -f $sysresources ]; then
+	xrdb -merge $sysresources
+fi
+if [ -f $sysmodmap ]; then
+	xmodmap $sysmodmap
+fi
+if [ -f $userresources ]; then
+	xrdb -merge $userresources
+fi
+if [ -f $usermodmap ]; then
+	xmodmap $usermodmap
+fi
+
+function start_term() {
+	exec /usr/bin/xterm -name login -geometry 150x60+0+0 -C -fg black -bg white +sb -T "Console login"
+}
+function start_wmii() {
+	exec /usr/bin/wmii
+}
+function start_gnome() {
+	exec gnome-session 
+}
+function start_xfce() {
+	exec startxfce4 
+}
+function start_kde4() {
+	exec startkde
+}
+function start_e17() {
+	exec /opt/e17/bin/enlightenment_start
+}
+function start_fluxbox() {
+	exec startfluxbox
+}
+function start_metisse() {
+	Xmetisse -ac -geometry 1280x1024 :1 >& .Xmetisse-log &
+	metisse-start-fvwm >& .compositor-log &
+	xterm
+	killall Xmetisse
+}
+function start_xmonad() {
+	fbsetbg -a -r /home/orphee/d/data/wallpapers
+	exec xmonad
+}
+function start_awesome() {
+	exec /usr/bin/awesome
+}
+
+case $SESSION in
+	xfce) start_xfce ;;
+	gnome) start_gnome ;;
+	fluxbox) start_fluxbox ;;
+	term) start_term ;;
+	e17) start_e17 ;;
+	kde4-svn) start_kde4 ;;
+	wmii) start_wmii ;;
+	awesome) start_awesome ;;
+	metisse) start_metisse ;;
+	xmonad) start_xmonad ;;
+esac
