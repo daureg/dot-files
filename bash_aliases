@@ -94,4 +94,12 @@ start_ssh() {
 	/usr/bin/ssh-add
 }
 
+bench3d() {
+	lspci | grep VGA | colrm 1 4
+	cat /proc/cpuinfo | grep "model name\|MHz"
+	xdpyinfo | grep "version:\|dimensions\|depth of"
+	glxinfo | grep -A2 "direct rendering\|OpenGL vendor"
+	glxgears & sleep 26
+	killall glxgears
+}
 # vim: ft=sh
