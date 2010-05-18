@@ -1,0 +1,8 @@
+[push]
+	default = matching
+[user]
+	name = Géraud Le Falher
+	email = daureg@gmail.com
+[github]
+	user = daureg
+	token = 340c0ba445ec4bf3a671855c68b89677
