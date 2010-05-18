@@ -25,6 +25,7 @@ alias svx='cp /etc/X11/xorg.conf ~/data/x11/xorg.conf.`date +"%Y-%m-%d-%H-%M-%S"
 alias gts="git status"
 alias gtc="git commit"
 alias gtl='git log --date=short --pretty=format:"%cd %s"'
+alias gssh=start_ssh
 
 # Misc
 alias pclm='pkg-config --cflags --libs --modversion'
@@ -84,4 +85,13 @@ hgl() {
 	hg log -l $N |grep summ|cut -c14-|less
 	rm .pete__
 }
+
+start_ssh() {
+	local SSH_ENV="$HOME/.ssh/environment"
+	/usr/bin/ssh-agent | sed 's/^echo/#echo/' > "$SSH_ENV"
+	chmod 600 "$SSH_ENV"
+	. "$SSH_ENV" > /dev/null
+	/usr/bin/ssh-add
+}
+
 # vim: ft=sh
