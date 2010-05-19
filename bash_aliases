@@ -17,6 +17,10 @@ alias pu='sudo pacman -U'
 alias mpkg='ct makepkg -L'
 alias rpkg='rm -rf pkg/ src/ *tar* *zip* *.log* svn_log'
 
+alias aptc='sudo apt-get autoclean; sudo apt-get autoremove; \
+sudo apt-get clean;'
+alias aptu='sudo apt-get install'
+
 # Xorg
 alias x="startx"
 alias svx='cp /etc/X11/xorg.conf ~/data/x11/xorg.conf.`date +"%Y-%m-%d-%H-%M-%S"`'
@@ -64,6 +68,24 @@ uparch() {
 		echo "Mise à jour des paquets"
 		time sudo pacman -Syu 
 	fi
+}
+
+ubuntu_up() {
+	local DAY=`date +%u`
+	if [ $DAY -eq 7 ]
+	then
+		echo $RANDOM > .KEEPITALIVE
+		echo "FTP :"
+		lftp -e "put .KEEPITALIVE && exit" -u daureg ftpperso.free.fr
+		rm .KEEPITALIVE
+
+		sudo gtk-update-icon-cache -f -t /usr/share/icons/hicolor
+		sudo update-desktop-database /usr/share/applications
+	fi
+
+		echo "Mise à jour des paquets"
+		time sudo apt-get update
+		time sudo apt-get upgrade
 }
 
 save_all() {
