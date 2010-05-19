@@ -14,12 +14,15 @@ alias sv='sudo vim'
 # pacman
 alias pc='yes "o" | sudo pacman -Scc'
 alias pu='sudo pacman -U'
+alias pd='sudo pacman -Rns'
+alias pdd='sudo pacman -Rdns'
 alias mpkg='ct makepkg -L'
 alias rpkg='rm -rf pkg/ src/ *tar* *zip* *.log* svn_log'
 
-alias aptc='sudo apt-get autoclean; sudo apt-get autoremove; \
-sudo apt-get clean;'
+# apt-get
+alias aptc='sudo apt-get autoremove && sudo apt-get autoclean && sudo apt-get clean'
 alias aptu='sudo apt-get install'
+alias aptd='sudo apt-get remove --purge'
 
 # Xorg
 alias x="startx"
