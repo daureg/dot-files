@@ -11,7 +11,11 @@ if has('gui_running')
 endif
 
 set background=dark
-
+set enc=utf-8
+set ff=unix
+set nospell
+set spelllang=fr
+set spellfile=~/.spell.utf-8.add
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
@@ -68,8 +72,23 @@ if has("autocmd")
 
   augroup END
 
+  augroup Mine
+	  autocmd BufEnter *.nv setlocal wrap spell nolinebreak
+	  " Template
+	  au BufNewFile *.py 0r ~/.vim/templates/python
+	  au BufNewFile *.html 0r ~/.vim/templates/html
+	  au BufNewFile *.tex 0r ~/.vim/templates/xetex
+	  au BufNewFile *.pas 0r ~/.vim/templates/pascal
+	  autocmd BufRead *.cpp set cindent
+	  autocmd BufRead *.h set cindent
+  augroup END
+
 else
 
   set autoindent		" always set autoindenting on
 
 endif " has("autocmd")
+
+
+nmap ,t :ToggleWord<CR>
+:command -bar -nargs=1 OpenURL :!firefox <args>
