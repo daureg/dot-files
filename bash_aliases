@@ -31,6 +31,7 @@ alias svx='cp /etc/X11/xorg.conf ~/data/x11/xorg.conf.`date +"%Y-%m-%d-%H-%M-%S"
 # git
 alias gts="git status"
 alias gtc="git commit"
+alias gtd="git diff"
 alias gtl='git log --date=short --pretty=format:"%cd %s"'
 alias gssh=start_ssh
 
