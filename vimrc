@@ -105,4 +105,26 @@ function! Browser ()
   let line = escape (line, "#?&;|%")
   exec ':silent !firefox ' . "\"" . line . "\""
 endfunction
-vmap ,w :call Browser()<CR>
+vmap ,w :call Browser()<CR>"
+
+" Utilise Ctrl-Tab pour changer d'onglets
+map <C-Tab> gt
+
+" F2 donne la date
+map <F2> a<C-R>=strftime("%c")<CR><Esc>
+
+" complète avec la plus longue chaine commune et montre une liste de ceux qui
+" reste
+set wildmode=list:longest
+
+" Tout ce qui est sauvegardé sous viminfo
+" set viminfo='1000,f1,<500
+
+" Tout ce qui est sauvegardé avec les sessions
+" set sessionoptions='1000,f1,<500 +tab
+
+" Flash visuel en cas d'erreur (30 ms)
+set visualbell t_vb="<Esc>|30f"
+
+map <Up> gk
+map <Down> gj
