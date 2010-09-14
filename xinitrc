@@ -4,17 +4,13 @@ userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
-DEFAULT_SESSION=xfce
 
-if [ $# == 1 ]
-then
-	SESSION=$1
-else
-	SESSION=$DEFAULT_SESSION
-fi
+SESSION=xfce
 
 #aplay -q $HOME/.sounds/startup.wav &
 fbsetbg -a -r $HOME/data/wallpapers
+numlockx on
+setxkbmap fr oss
 
 # merge in defaults and keymaps
 if [ -f $sysresources ]; then
@@ -76,4 +72,5 @@ case $SESSION in
 	awesome) start_awesome ;;
 	metisse) start_metisse ;;
 	xmonad) start_xmonad ;;
+	*) start_xfce ;;
 esac

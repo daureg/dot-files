@@ -37,7 +37,9 @@ alias gssh=start_ssh
 
 # Misc
 alias pclm='pkg-config --cflags --libs --modversion'
-alias less=/usr/share/vim/vim72/macros/less.sh
+if [ -e /usr/share/vim/vim73/macros/less.sh ]; then
+alias less=/usr/share/vim/vim73/macros/less.sh
+fi
 
 getpkg() {
 	time svn co svn://svn.archlinux.org/packages/$1/trunk $1
