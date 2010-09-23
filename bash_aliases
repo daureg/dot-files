@@ -40,6 +40,7 @@ alias pclm='pkg-config --cflags --libs --modversion'
 if [ -e /usr/share/vim/vim73/macros/less.sh ]; then
 alias less=/usr/share/vim/vim73/macros/less.sh
 fi
+alias p=python3
 
 getpkg() {
 	time svn co svn://svn.archlinux.org/packages/$1/trunk $1
