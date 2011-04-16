@@ -78,7 +78,6 @@ if has("autocmd")
 	  au BufNewFile *.py 0r ~/.vim/templates/python
 	  au BufNewFile *.html 0r ~/.vim/templates/html
 	  au BufNewFile *.tex 0r ~/.vim/templates/xetex
-	  au BufNewFile *.pas 0r ~/.vim/templates/pascal
 	  autocmd BufRead *.cpp set cindent
 	  autocmd BufRead *.h set cindent
   augroup END

@@ -1,0 +1,15 @@
+\documentclass[a4paper,oneside,onecolumn,final,titlepage 12pt]{article}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\XeTeXdefaultencoding utf-8
+\usepackage{xltxtra}
+\setmainfont{Linux Libertine O}
+\fontspec[Ligatures={Common}]{Linux Libertine O}
+\fontspec[Numbers={OldStyle}]{Linux Libertine O}
+
+\title{}
+\author{Géraud Le Falher}
+
+\begin{document}
+\maketitle
+\end{document}
