@@ -4,7 +4,25 @@ alias ll='ls -larht --color=auto'
 alias g='grep --color=auto'
 alias ct='clear && time'
 alias d='colordiff -Naurp'
-
+alias mkdir='mkdir -pv'
+alias ping='ping -c 5'
+alias ..='cd ..'
+# new commands
+alias hist='history | grep $1'      # requires an argument
+alias openports='netstat --all --numeric --programs --inet'
+alias pg='ps -Af | grep $1'         # requires an argument
+# privileged access
+if [ $UID -ne 0 ]; then
+    alias scat='sudo cat'
+    alias root='sudo su'
+    alias reboot='sudo reboot'
+    alias halt='sudo halt'
+    alias netcfg='sudo netcfg2'
+fi
+# safety features
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
 # sudo
 alias sduo=sudo
 alias rst='sudo reboot'
@@ -37,10 +55,12 @@ alias gssh=start_ssh
 
 # Misc
 alias pclm='pkg-config --cflags --libs --modversion'
+alias serv='sudo /etc/rc.d/httpd start && sudo /etc/rc.d/mysqld start'
 if [ -e /usr/share/vim/vim73/macros/less.sh ]; then
 alias less=/usr/share/vim/vim73/macros/less.sh
 fi
-alias p=python3
+alias p=python
+alias p2=python2
 
 getpkg() {
 	time svn co svn://svn.archlinux.org/packages/$1/trunk $1
@@ -101,8 +121,8 @@ save_all() {
 	cd $HOME
 	save_pkg
 	tar caf pkg.tar.lzma .pkg 
-	tar caf data.tar.lzma d/data
-	tar caf devel.tar.lzma d/devel
+	tar caf data.tar.lzma data/
+	tar caf devel.tar.lzma devel/
 	sudo tar caf etc.tar.lzma /etc
 	echo "NON COMPLET, Dépécher vous de le copier quelque part"
 }
@@ -130,5 +150,51 @@ bench3d() {
 	glxinfo | grep -A2 "direct rendering\|OpenGL vendor"
 	glxgears & sleep 26
 	killall glxgears
+}
+extract() {
+    local c e i
+
+    (($#)) || return
+
+    for i; do
+        c=''
+        e=1
+
+        if [[ ! -r $i ]]; then
+            echo "$0: file is unreadable: \`$i'" >&2
+            continue
+        fi
+
+        case $i in
+        *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz)))))
+               c='bsdtar xvf';;
+        *.7z)  c='7z x';;
+        *.Z)   c='uncompress';;
+        *.bz2) c='bunzip2';;
+        *.exe) c='cabextract';;
+        *.gz)  c='gunzip';;
+        *.rar) c='unrar x';;
+        *.xz)  c='unxz';;
+        *.zip) c='unzip';;
+        *)     echo "$0: unrecognized file extension: \`$i'" >&2
+               continue;;
+        esac
+
+        command $c "$i"
+        e=$?
+    done
+
+    return $e
+}
+man() {
+	env \
+		LESS_TERMCAP_mb=$(printf "\e[1;37m") \
+		LESS_TERMCAP_md=$(printf "\e[1;37m") \
+		LESS_TERMCAP_me=$(printf "\e[0m") \
+		LESS_TERMCAP_se=$(printf "\e[0m") \
+		LESS_TERMCAP_so=$(printf "\e[1;47;30m") \
+		LESS_TERMCAP_ue=$(printf "\e[0m") \
+		LESS_TERMCAP_us=$(printf "\e[0;36m") \
+			man "$@"
 }
 # vim: ft=sh
