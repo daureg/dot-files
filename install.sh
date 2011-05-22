@@ -1,8 +1,10 @@
 #! /bin/sh
 mkdir -pv ~/.vim/templates
+mkdir -pv ~/.vim/snippets
 ln -svf templates/xetex ~/.vim/templates/xetex
 ln -svf templates/python ~/.vim/templates/python
 ln -svf templates/html ~/.vim/templates/html
+ln -svf c-my.snippets ~/.vim/snippets/c-my.snippets
 ln -sfv $HOME/devel/dot-files/gvimrc $HOME/.gvimrc
 ln -sfv $HOME/devel/dot-files/vimrc $HOME/.vimrc
 ln -sfv $HOME/devel/dot-files/xinitrc $HOME/.xinitrc
