@@ -27,25 +27,25 @@ if [ -f $usermodmap ]; then
 fi
 
 function start_term() {
-	exec /usr/bin/xterm -name login -geometry 150x60+0+0 -C -fg black -bg white +sb -T "Console login"
+	exec ck-launch-session /usr/bin/xterm -name login -geometry 150x60+0+0 -C -fg black -bg white +sb -T "Console login"
 }
 function start_wmii() {
-	exec /usr/bin/wmii
+	exec ck-launch-session /usr/bin/wmii
 }
 function start_gnome() {
-	exec gnome-session 
+	exec ck-launch-session gnome-session 
 }
 function start_xfce() {
-	exec startxfce4 
+	exec ck-launch-session startxfce4 
 }
 function start_kde4() {
-	exec startkde
+	exec ck-launch-session startkde
 }
 function start_e17() {
-	exec /opt/e17/bin/enlightenment_start
+	exec ck-launch-session /opt/e17/bin/enlightenment_start
 }
 function start_fluxbox() {
-	exec startfluxbox
+	exec ck-launch-session startfluxbox
 }
 function start_metisse() {
 	Xmetisse -ac -geometry 1280x1024 :1 >& .Xmetisse-log &
@@ -55,10 +55,10 @@ function start_metisse() {
 }
 function start_xmonad() {
 	fbsetbg -a -r /home/orphee/d/data/wallpapers
-	exec xmonad
+	exec ck-launch-session xmonad
 }
 function start_awesome() {
-	exec /usr/bin/awesome
+	exec ck-launch-session /usr/bin/awesome
 }
 
 case $SESSION in
