@@ -54,6 +54,8 @@ alias gtl='git log --date=short --pretty=format:"%cd %s"'
 alias gssh=start_ssh
 
 # Misc
+#alias spell='hunspell -d fr_FR -i utf8'
+alias gram='java -jar ~/devel/LanguageTool/LanguageTool.jar -l fr'
 alias pclm='pkg-config --cflags --libs --modversion'
 alias serv='sudo /etc/rc.d/httpd start && sudo /etc/rc.d/mysqld start'
 if [ -e /usr/share/vim/vim73/macros/less.sh ]; then
@@ -142,7 +144,9 @@ start_ssh() {
 	. "$SSH_ENV" > /dev/null
 	/usr/bin/ssh-add
 }
-
+spl() {
+	hunspell -d fr_FR -l $1 |sort|uniq
+}
 bench3d() {
 	lspci | grep VGA | colrm 1 4
 	cat /proc/cpuinfo | grep "model name\|MHz"
