@@ -127,3 +127,4 @@ set visualbell t_vb="<Esc>|30f"
 
 map <Up> gk
 map <Down> gj
+let g:languagetool_jar=$HOME . '/devel/LanguageTool/LanguageTool.jar'
