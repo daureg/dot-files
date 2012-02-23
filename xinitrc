@@ -38,7 +38,7 @@ function start_gnome() {
 function start_xfce() {
 	exec ck-launch-session startxfce4 
 }
-function start_kde4() {
+function start_kde() {
 	exec ck-launch-session startkde
 }
 function start_e17() {
@@ -60,9 +60,13 @@ function start_xmonad() {
 function start_awesome() {
 	exec ck-launch-session /usr/bin/awesome
 }
+function start_e17() {
+	exec ck-launch-session /usr/bin/enlightenment_start
+}
 
 case $SESSION in
 	xfce) start_xfce ;;
+	e17) start_e17 ;;
 	gnome) start_gnome ;;
 	fluxbox) start_fluxbox ;;
 	term) start_term ;;
