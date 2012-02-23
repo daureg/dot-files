@@ -1,0 +1,58 @@
+snippet acro
+	\newacronym{${1:label}}{${2:abbr}}{${3:full}}
+	${4}
+
+snippet glos
+	\newglossaryentry{${1:name}} {
+		name=${2:$1},
+		description={${3:desc}},
+		plural=${4:$1}s}
+	${5}
+snippet ifig
+	\begin{figure}[hbtp]
+	\includegraphics[width=\textwidth]{${1:name}}
+	\label{fig:${2:$1}}
+	\caption[${3:short}]{${4:long}}
+	\end{figure}
+	${5}
+snippet ft
+	\footnote{${1}}${2}
+snippet nb
+	\numprint{${1}}${2}
+snippet itab
+	\begin{table}[ht]
+	\centering
+	\rowcolors{1}{Azure}{Honeydew}
+	\begin{tabular}{|l|l|l|}
+	\hline
+	{\bfseries T1} & {\bfseries T2} & {\bfseries T3} \tabularnewline
+	\hline
+	\end{tabular}
+	\label{tab:${1:name}}
+	\caption[${2:short}]{${3:long}}
+	\end{table}
+snippet mlg
+	\multirow{${1:nbrow}}{*}{PREMIERE}
+	& L1.1 & L1.2 \tabularnewline
+	& L2.1 & L2.2 \tabularnewline
+	\hline
+snippet epi
+	\epigraph{${1:text}}{\emph{${2:source}}\\ ${3:afirst} \textsc{${4:alast}}}
+	${4}
+snippet let
+	\lettrine[lines=3, lhang=0.2, loversize=0.33, slope=0.0em, findent=0.0em, nindent=0.3em]{${1:lettre}}{${2:reste}} ${3}
+snippet plot
+	\begin{tikzpicture}
+		\begin{loglogaxis}[
+			xlabel=${1:x},
+			ylabel=${2:y}]
+			\addplot table[x=${3:$1},y=${4:$2}] {${5:filename}.dat};
+			\addlegendentry{${6:courbename}}
+		\end{loglogaxis}
+	\end{tikzpicture}
+snippet code
+	\vspace{1.5cm}
+	\label{${1}}
+	\begin{java}[label=${1}]
+	${2:code}
+	\end{java}
