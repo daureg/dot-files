@@ -54,7 +54,6 @@ alias gtl='git log --date=short --pretty=format:"%cd %s"'
 alias gssh=start_ssh
 
 # Misc
-#alias spell='hunspell -d fr_FR -i utf8'
 alias gram='java -jar ~/devel/LanguageTool/LanguageTool.jar -l fr'
 alias pclm='pkg-config --cflags --libs --modversion'
 alias serv='sudo /etc/rc.d/httpd start && sudo /etc/rc.d/mysqld start'
@@ -145,7 +144,7 @@ start_ssh() {
 	/usr/bin/ssh-add
 }
 spl() {
-	hunspell -d fr_FR -l $1 |sort|uniq
+	hunspell -d fr_FR -l $1 | grep -v "^-"|sort|uniq
 }
 bench3d() {
 	lspci | grep VGA | colrm 1 4
