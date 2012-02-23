@@ -30,10 +30,11 @@ alias stop='sudo shutdown -h now'
 alias sv='sudo vim'
 
 # pacman
-alias pc='yes "o" | sudo pacman -Scc'
-alias pu='sudo pacman -U'
-alias pd='sudo pacman -Rns'
-alias pdd='sudo pacman -Rdns'
+alias pacman='pacmatic'
+alias pc='yes "o" | sudo pacmatic -Scc'
+alias pu='sudo pacmatic -U'
+alias pd='sudo pacmatic -Rns'
+alias pdd='sudo pacmatic -Rdns'
 alias mpkg='ct makepkg -L'
 alias rpkg='rm -rf pkg/ src/ *tar* *zip* *.log* svn_log'
 
@@ -94,7 +95,7 @@ uparch() {
 		time yaourt -Syu --aur
 	else
 		echo "Mise à jour des paquets"
-		time sudo pacman -Syu 
+		time sudo pacmatic -Syu 
 	fi
 }
 
