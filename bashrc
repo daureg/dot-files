@@ -3,6 +3,7 @@
 
 source ~/.bash_aliases
 source /etc/profile
+export PATH=$PATH:~/bin/
 export EDITOR=/usr/bin/vim
 export EMAIL="Géraud Le Falher <daureg@gmail.com>"
 export GREP_OPTIONS="--exclude-dir=\.svn"
