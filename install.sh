@@ -1,9 +1,9 @@
 #! /bin/sh
 mkdir -pv ~/.vim/templates
 mkdir -pv ~/.vim/snippets
-ln -svf templates/xetex ~/.vim/templates/xetex
-ln -svf templates/python ~/.vim/templates/python
-ln -svf templates/html ~/.vim/templates/html
+ln -svf $HOME/devel/dot-files/templates/xetex ~/.vim/templates/xetex
+ln -svf $HOME/devel/dot-files/templates/python ~/.vim/templates/python
+ln -svf $HOME/devel/dot-files/templates/html ~/.vim/templates/html
 ln -svf $HOME/devel/dot-files/snippets/c-my.snippets ~/.vim/snippets/c-my.snippets
 ln -svf $HOME/devel/dot-files/snippets/tex-my.snippets ~/.vim/snippets/tex-my.snippets
 ln -svf $HOME/devel/dot-files/snippets/javascript-my.snippets ~/.vim/snippets/javascript-my.snippets
@@ -17,3 +17,4 @@ ln -sfv $HOME/devel/dot-files/bash_profile $HOME/.bash_profile
 ln -sfv $HOME/devel/dot-files/bash_aliases $HOME/.bash_aliases
 ln -sfv $HOME/devel/dot-files/gitconfig $HOME/.git_config
 ln -sfv $HOME/devel/dot-files/valgrindrc $HOME/.valgrindrc
+ln -sfv $HOME/devel/dot-files/astylerc $HOME/.astylerc
