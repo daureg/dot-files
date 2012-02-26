@@ -64,6 +64,7 @@ alias serv='sudo /etc/rc.d/httpd start && sudo /etc/rc.d/mysqld start'
 if [ -e /usr/share/vim/vim73/macros/less.sh ]; then
 alias less=/usr/share/vim/vim73/macros/less.sh
 fi
+alias m="vim mail.nv"
 alias p=python
 alias p2=python2
 
