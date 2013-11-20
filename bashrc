@@ -1,13 +1,15 @@
 # Check for an interactive session
 [ -z "$PS1" ] && return
-
 source ~/.bash_aliases
 source /etc/profile
-export PATH=$PATH:~/bin/
+export PATH=$PATH:~/bin/:~/.cabal/bin
 export EDITOR=/usr/bin/vim
 export EMAIL="Géraud Le Falher <daureg@gmail.com>"
 export GREP_OPTIONS="--exclude-dir=\.svn"
 export GREP_COLOR="1;32"                    # green
+export PYTHONSTARTUP=~/.pythonrc
+# http://www.catonmat.net/blog/bash-vi-editing-mode-cheat-sheet/ and man readline
+set -o vi
 
 # History file: (must haves for those that use the command line alot)
 # Increase history file size,
@@ -61,6 +63,7 @@ fi
 
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
+bind -m vi-insert "\C-p":history-search-backward
 
 # xhost +si:localuser:$(whoami)
 export PS1="\
@@ -72,3 +75,5 @@ export PS1="\
 \e[1;34m \W \e[m\n"
 clear
 #\e[1;31m \$(get_sysinfo cpu_temp)\e[m |\
+[[ -s /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
+export GPODDER_HOME=/home/orphee/data/podcast
