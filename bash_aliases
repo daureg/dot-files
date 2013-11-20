@@ -1,4 +1,5 @@
 # Coreutils
+alias mm='sudo mount -v /dev/sda10'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -33,11 +34,11 @@ alias stop='sudo shutdown -h now'
 alias sv='sudo vim'
 
 # pacman
-alias pacman='pacmatic'
-alias pc='yes "o" | sudo pacmatic -Scc'
-alias pu='sudo pacmatic -U'
-alias pd='sudo pacmatic -Rns'
-alias pdd='sudo pacmatic -Rdns'
+alias pacman='pacman'
+alias pc='yes "o" | sudo pacman -Scc'
+alias pu='sudo pacman -U'
+alias pd='sudo pacman -Rns'
+alias pdd='sudo pacman -Rdns'
 alias mpkg='ct makepkg -L'
 alias rpkg='rm -rf pkg/ src/ *tar* *zip* *.log* svn_log'
 
@@ -47,7 +48,7 @@ alias aptu='sudo apt-get install'
 alias aptd='sudo apt-get remove --purge'
 
 # Xorg
-alias x="startx"
+alias x=startx
 alias svx='cp /etc/X11/xorg.conf ~/data/x11/xorg.conf.`date +"%Y-%m-%d-%H-%M-%S"`'
 
 # git
@@ -55,11 +56,13 @@ alias gts="git status"
 alias gtc="git commit"
 alias gtd="git diff"
 alias gtl='git log --date=short --pretty=format:"%cd %s"'
+#GiT Long Log
+alias gtll='git log --graph --stat --pretty=format:"%ar: %s (%an)"'
 alias gssh=start_ssh
 
 # Misc
-alias gram='java -jar ~/devel/LanguageTool/LanguageTool.jar -l fr'
-alias pclm='pkg-config --cflags --libs --modversion'
+alias gram='java -jar ~/LT/LanguageTool.jar -l fr'
+alias pclm='pkg-config --modversion'
 alias serv='sudo /etc/rc.d/httpd start && sudo /etc/rc.d/mysqld start'
 if [ -e /usr/share/vim/vim73/macros/less.sh ]; then
 alias less=/usr/share/vim/vim73/macros/less.sh
@@ -82,7 +85,10 @@ tgz() {
 tlz() {
 	time tar caf `basename $1`.tar.lzma `basename $1`
 }
-
+sopcast() {
+	sp-sc $1 3908 8908 > /dev/null &
+	vlc http://localhost:8908/tv.asf &
+}
 uparch() {
 	local DAY=`date +%u`
 	if [ $DAY -eq 7 ]
@@ -97,9 +103,11 @@ uparch() {
 
 		echo "Mise à jour des paquets"
 		time yaourt -Syu --aur
+		# time sudo pacman -Syu
+		# meat -U
 	else
 		echo "Mise à jour des paquets"
-		time sudo pacmatic -Syu 
+		time sudo pacman -Syu
 	fi
 }
 
@@ -126,7 +134,7 @@ save_all() {
 	read anykey
 	cd $HOME
 	save_pkg
-	tar caf pkg.tar.lzma .pkg 
+	tar caf pkg.tar.lzma .pkg
 	tar caf data.tar.lzma data/
 	tar caf devel.tar.lzma devel/
 	sudo tar caf etc.tar.lzma /etc
@@ -134,7 +142,7 @@ save_all() {
 }
 
 hgl() {
-	hg pull > .pete__ 
+	hg pull > .pete__
 	hg update
 	N=`grep with .pete__ |cut -c7-|cut -d ' ' -f1`
 	hg log -l $N |grep summ|cut -c14-|less
@@ -204,5 +212,10 @@ man() {
 		LESS_TERMCAP_ue=$(printf "\e[0m") \
 		LESS_TERMCAP_us=$(printf "\e[0;36m") \
 			man "$@"
+}
+#count words
+cw() {
+	cat $1 |tr A-Z a-z|tr ' ' '\n'|sort|uniq -c|sort -n
+	#tr 'A-Z' 'a-z' < genesis | tr -sc 'A-Z' '\012' | sort | uniq -c > dict
 }
 # vim: ft=sh
