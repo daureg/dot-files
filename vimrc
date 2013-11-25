@@ -20,7 +20,7 @@ set spellfile=~/.spell.utf-8.add
 set backspace=indent,eol,start
 
 set nobackup		" do not keep a backup file
-set history=50		" keep 50 lines of command line history
+set history=2000	" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
@@ -73,6 +73,9 @@ if has("autocmd")
   augroup END
 
   augroup Mine
+	  autocmd Filetype latex setlocal conceallevel=0
+	  autocmd Filetype tex setlocal conceallevel=0
+	  autocmd Filetype java setlocal omnifunc=javacomplete#Complete makeprg=ant efm=\ %#[javac]\ %#%f:%l:%c:%*\\d:%*\\d:\ %t%[%^:]%#:%m,\%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#
 	  autocmd BufEnter *.nv setlocal wrap spell nolinebreak
 	  " Template
 	  au BufNewFile *.py 0r ~/.vim/templates/python
@@ -83,9 +86,7 @@ if has("autocmd")
   augroup END
 
 else
-
   set autoindent		" always set autoindenting on
-
 endif " has("autocmd")
 
 
@@ -123,8 +124,44 @@ set wildmode=list:longest
 " set sessionoptions='1000,f1,<500 +tab
 
 " Flash visuel en cas d'erreur (30 ms)
-set visualbell t_vb="<Esc>|30f"
+"set visualbell t_vb="<Esc>|10f"
 
+" To move in screen line for very long line
 map <Up> gk
 map <Down> gj
-let g:languagetool_jar=$HOME . '/devel/LanguageTool/LanguageTool.jar'
+let g:languagetool_jar=$HOME . '/LT/languagetool-commandline.jar'
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+execute pathogen#infect()
+"nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+
+" if exists("*AddCycleGroup")
+" 	call AddCycleGroup(['on', 'off'])
+" 	call AddCycleGroup('python', ['True', 'False'])
+" endif
+" let g:indentLine_color_term = 239
+" let g:indentLine_char = '¦'
+set listchars=eol:↵,tab:>-,trail:×,nbsp:␣
+" https://groups.google.com/forum/?fromgroups#!topic/vim_dev/yJ1etO80AKc
+" set regexpengine=1
+
+" Retourne à la parenthèse ouvrante en fermant.
+set showmatch
+set matchtime=4
+
+" http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+" undofile tells Vim to create <FILENAME>.un~ files whenever you edit a file.
+" These files contain undo information so you can undo previous actions even
+" after you close and reopen a file.
+" set undofile
+set colorcolumn=85
+inoremap jj <ESC>
+set laststatus=2
+" change the mapleader from \ to ,
+let mapleader=","
+let g:EasyMotion_leader_key = '<Leader>'
+let g:netrw_browsex_viewer= "xdg-open"
