@@ -1,5 +1,11 @@
 #!/bin/sh
-
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
@@ -11,6 +17,10 @@ SESSION=xfce
 fbsetbg -a -r $HOME/data/wallpapers
 numlockx on
 setxkbmap fr oss
+local SSH_ENV="$HOME/.ssh/environment"
+/usr/bin/ssh-agent | sed 's/^echo/#echo/' > "$SSH_ENV"
+chmod 600 "$SSH_ENV"
+. "$SSH_ENV" > /dev/null
 
 # merge in defaults and keymaps
 if [ -f $sysresources ]; then
@@ -27,25 +37,25 @@ if [ -f $usermodmap ]; then
 fi
 
 function start_term() {
-	exec ck-launch-session /usr/bin/xterm -name login -geometry 150x60+0+0 -C -fg black -bg white +sb -T "Console login"
+	exec  /usr/bin/xterm -name login -geometry 150x60+0+0 -C -fg black -bg white +sb -T "Console login"
 }
 function start_wmii() {
-	exec ck-launch-session /usr/bin/wmii
+	exec  /usr/bin/wmii
 }
 function start_gnome() {
-	exec ck-launch-session gnome-session 
+	exec  gnome-session
 }
 function start_xfce() {
-	exec ck-launch-session startxfce4 
+	exec  startxfce4
 }
 function start_kde() {
-	exec ck-launch-session startkde
+	exec  startkde
 }
 function start_e17() {
-	exec ck-launch-session /opt/e17/bin/enlightenment_start
+	exec  /opt/e17/bin/enlightenment_start
 }
 function start_fluxbox() {
-	exec ck-launch-session startfluxbox
+	exec  startfluxbox
 }
 function start_metisse() {
 	Xmetisse -ac -geometry 1280x1024 :1 >& .Xmetisse-log &
@@ -54,16 +64,16 @@ function start_metisse() {
 	killall Xmetisse
 }
 function start_xmonad() {
-	fbsetbg -a -r /home/orphee/d/data/wallpapers
-	exec ck-launch-session xmonad
+	exec  xmonad
 }
 function start_awesome() {
-	exec ck-launch-session /usr/bin/awesome
+	exec  /usr/bin/awesome
 }
 function start_e17() {
-	exec ck-launch-session /usr/bin/enlightenment_start
+	exec  /usr/bin/enlightenment_start
 }
 
+# exec $1
 case $SESSION in
 	xfce) start_xfce ;;
 	e17) start_e17 ;;

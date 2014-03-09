@@ -1,5 +1,8 @@
+# vim: ft=sh
+# find /usr/lib/ghc-7.6.3/site-local/ -name *_p.a -exec du '{}' \;|sort -n
+# pacman -Ql haskell-pandoc | cut -d ' ' -f2| grep -v "\/$"|xargs du|sort -n|tail
 # Coreutils
-alias mm='sudo mount -v /dev/sda10'
+alias mm='sudo mount -v /dev/sdb ~/fs/key'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -10,18 +13,15 @@ alias ct='clear && time'
 alias d='colordiff -Naurp'
 alias mkdir='mkdir -pv'
 alias ping='ping -c 5'
-alias ..='cd ..'
-# new commands
-alias hist='history | grep $1'      # requires an argument
+alias hist='history | grep'
 alias openports='netstat --all --numeric --programs --inet'
-alias pg='ps -Af | grep $1'         # requires an argument
+alias pg='ps -Af | grep'
 # privileged access
 if [ $UID -ne 0 ]; then
     alias scat='sudo cat'
     alias root='sudo su'
     alias reboot='sudo reboot'
     alias halt='sudo halt'
-    alias netcfg='sudo netcfg2'
 fi
 # safety features
 alias chown='chown --preserve-root'
@@ -61,15 +61,17 @@ alias gtll='git log --graph --stat --pretty=format:"%ar: %s (%an)"'
 alias gssh=start_ssh
 
 # Misc
-alias gram='java -jar ~/LT/LanguageTool.jar -l fr'
+alias gram='java -jar ~/LT/languagetool-commandline.jar -l en-US'
+alias gramf='java -jar ~/LT/languagetool-commandline.jar -l fr'
 alias pclm='pkg-config --modversion'
 alias serv='sudo /etc/rc.d/httpd start && sudo /etc/rc.d/mysqld start'
-if [ -e /usr/share/vim/vim73/macros/less.sh ]; then
-alias less=/usr/share/vim/vim73/macros/less.sh
+if [ -e /usr/share/vim/vim74/macros/less.sh ]; then
+alias less=/usr/share/vim/vim74/macros/less.sh
 fi
 alias m="vim mail.nv"
 alias p=python
 alias p2=python2
+alias cltex="rm -f *.{acn,acr,alg,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,glg,glo,gls,idx,ilg,ind,ist,lof,log,lot,maf,mtc,mtc0,nav,nlo,out,pdfsync,ps,run.xml,snm,synctex.gz,toc,vrb,xdy,tdo}"
 
 getpkg() {
 	time svn co svn://svn.archlinux.org/packages/$1/trunk $1
@@ -103,8 +105,6 @@ uparch() {
 
 		echo "Mise à jour des paquets"
 		time yaourt -Syu --aur
-		# time sudo pacman -Syu
-		# meat -U
 	else
 		echo "Mise à jour des paquets"
 		time sudo pacman -Syu
@@ -215,7 +215,21 @@ man() {
 }
 #count words
 cw() {
-	cat $1 |tr A-Z a-z|tr ' ' '\n'|sort|uniq -c|sort -n
-	#tr 'A-Z' 'a-z' < genesis | tr -sc 'A-Z' '\012' | sort | uniq -c > dict
+	cat $1 |tr A-Z a-z|tr ' ' '\n'| tr -d "?!.;,…0-9'"|sort|uniq -c|sort -n
 }
-# vim: ft=sh
+videort() {
+	pushd ~/fs/D/videos
+	rm -f ddur
+	for i in *.{avi,webm,mp4}
+	do
+		DUR=$(ffprobe $i 2>&1 | grep 'Duration' | awk '{print $2}'|cut -d '.' -f1);
+		echo $DUR $i >> ddur;
+	done
+	sort ddur -o ddur
+	popd
+}
+tmongo() {
+	ssh triton -N -L 27113:triton.aalto.fi:27133 -f
+	ssh triton -N -L 28113:triton.aalto.fi:28133 -f
+	cd ~/flitest
+}

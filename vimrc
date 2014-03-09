@@ -1,6 +1,19 @@
 " Use Vim settings, rather then Vi settings (much better!).
 set nocompatible
 
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'fs111/pydoc.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rking/ag.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'tpope/vim-surround'
+Bundle 'Valloric/YouCompleteMe'
+
 " Suffixes that get lower priority when doing tab completion for filenames.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 
@@ -11,16 +24,17 @@ if has('gui_running')
 endif
 
 set background=dark
+set textwidth=78
 set enc=utf-8
 set ff=unix
 set nospell
-set spelllang=fr
+set spelllang=en
 set spellfile=~/.spell.utf-8.add
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
 set nobackup		" do not keep a backup file
-set history=2000	" keep 50 lines of command line history
+set history=5000	" keep 5000 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
@@ -75,7 +89,6 @@ if has("autocmd")
   augroup Mine
 	  autocmd Filetype latex setlocal conceallevel=0
 	  autocmd Filetype tex setlocal conceallevel=0
-	  autocmd Filetype java setlocal omnifunc=javacomplete#Complete makeprg=ant efm=\ %#[javac]\ %#%f:%l:%c:%*\\d:%*\\d:\ %t%[%^:]%#:%m,\%A\ %#[javac]\ %f:%l:\ %m,%-Z\ %#[javac]\ %p^,%-C%.%#
 	  autocmd BufEnter *.nv setlocal wrap spell nolinebreak
 	  " Template
 	  au BufNewFile *.py 0r ~/.vim/templates/python
@@ -105,7 +118,7 @@ function! Browser ()
   let line = escape (line, "#?&;|%")
   exec ':silent !firefox ' . "\"" . line . "\""
 endfunction
-vmap ,w :call Browser()<CR>"
+vmap ,c :call Browser()<CR>"
 
 " Utilise Ctrl-Tab pour changer d'onglets
 map <C-Tab> gt
@@ -129,14 +142,13 @@ set wildmode=list:longest
 " To move in screen line for very long line
 map <Up> gk
 map <Down> gj
-let g:languagetool_jar=$HOME . '/LT/languagetool-commandline.jar'
 " If you prefer the Omni-Completion tip window to close when a selection is
 " made, these lines close it on movement in insert mode or when leaving
 " insert mode
 autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
-execute pathogen#infect()
+" execute pathogen#infect()
 "nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " if exists("*AddCycleGroup")
@@ -158,10 +170,15 @@ set matchtime=4
 " These files contain undo information so you can undo previous actions even
 " after you close and reopen a file.
 " set undofile
-set colorcolumn=85
+" set colorcolumn=85
 inoremap jj <ESC>
-set laststatus=2
+set laststatus=0
 " change the mapleader from \ to ,
 let mapleader=","
 let g:EasyMotion_leader_key = '<Leader>'
-let g:netrw_browsex_viewer= "xdg-open"
+let g:netrw_browsex_viewer= "firefox"
+let g:syntastic_python_checkers=['flake8', 'pylint']
+let g:syntastic_python_flake8_args="--max-complexity 13"
+let g:syntastic_python_pylint_args="-d C0325"
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMRU'

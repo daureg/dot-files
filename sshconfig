@@ -1,0 +1,15 @@
+Host kosh
+    hostname kosh.aalto.fi
+    user lefalg1
+    port 22
+Host brute
+    hostname brute.aalto.fi
+    user lefalg1
+    port 22
+Host force
+    hostname force.aalto.fi
+    user lefalg1
+    port 22
+Host triton
+    user lefalg1
+    ProxyCommand ssh kosh -W %h:%p

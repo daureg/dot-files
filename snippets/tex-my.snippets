@@ -28,8 +28,7 @@ snippet itab
 	{\bfseries T1} & {\bfseries T2} & {\bfseries T3} \tabularnewline
 	\hline
 	\end{tabular}
-	\label{tab:${1:name}}
-	\caption[${2:short}]{${3:long}}
+	\caption[${2:short}]{${3:long}\label{tab:${1:name}}}
 	\end{table}
 snippet mlg
 	\multirow{${1:nbrow}}{*}{PREMIERE}
@@ -56,3 +55,14 @@ snippet code
 	\begin{java}[label=${1}]
 	${2:code}
 	\end{java}
+snippet btab
+	\begin{table}[ht]
+	\centering
+	\begin{tabular}{lll}
+	\toprule
+	{\bfseries T1} & {\bfseries T2} & {\bfseries T3} \\
+	\midrule
+	\bottomrule
+	\end{tabular}
+	\caption[${2:short}]{${3:long}\label{tab:${1:name}}}
+	\end{table}

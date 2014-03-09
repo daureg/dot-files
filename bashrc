@@ -2,8 +2,8 @@
 [ -z "$PS1" ] && return
 source ~/.bash_aliases
 source /etc/profile
-export PATH=$PATH:~/bin/:~/.cabal/bin
-export EDITOR=/usr/bin/vim
+export PATH=~/bin/:~/.local/bin:$PATH
+export EDITOR=vim
 export EMAIL="Géraud Le Falher <daureg@gmail.com>"
 export GREP_OPTIONS="--exclude-dir=\.svn"
 export GREP_COLOR="1;32"                    # green
@@ -17,7 +17,7 @@ set -o vi
 # append commands instead of overwriting (nice for two or more sessions), 
 # add command to history after executing,
 # don't put duplicate lines in history, ignore same successive entries.
-export HISTFILESIZE=20000
+export HISTFILESIZE=50000
 export HISTSIZE=5000
 shopt -s histappend
 PROMPT_COMMAND='history -a'
@@ -69,11 +69,11 @@ bind -m vi-insert "\C-p":history-search-backward
 export PS1="\
 \e[0;32m\D{%a %d %b}\e[m |\
 \e[1;32m \D{%T}\e[m |\
-\e[1;35m \$(get_sysinfo uptime)\e[m |\
-\e[0;36m \$(get_sysinfo disk_free ${DISTRO})\e[m |\
-\e[1;36m \$(get_sysinfo mem_free)\e[m |\
+\e[1;35m \$(uptime | awk '{print \$3;}'|tr -d ',')\e[m |\
+\e[0;36m \$(df -BM|grep sda9| awk '{print \$4;}')\e[m |\
+\e[1;36m \$(free -m|grep 'cache:'| awk '{print \$4;}')Mo\e[m |\
+\e[1;31m \$(cut -c-2 /sys/class/thermal/thermal_zone0/temp)°C\e[m |\
 \e[1;34m \W \e[m\n"
-clear
-#\e[1;31m \$(get_sysinfo cpu_temp)\e[m |\
 [[ -s /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
 export GPODDER_HOME=/home/orphee/data/podcast
+clear

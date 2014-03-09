@@ -1,2 +1,11 @@
 [MESSAGES CONTROL]
-disable-msg=C0325
+# disable-msg=C0325
+disable-msg=superfluous-parens
+
+[REPORTS]
+
+# Available formats are text, parseable, colorized and html
+output-format=colorized
+
+# Include message's id in output
+include-ids=yes
