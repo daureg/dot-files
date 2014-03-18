@@ -2,24 +2,25 @@
 mkdir -pv ~/.vim/templates
 mkdir -pv ~/.vim/snippets
 mkdir -pv ~/.vim/ftplugin
-ln -svf templates/xetex ~/.vim/templates/xetex
-ln -svf templates/python ~/.vim/templates/python
-ln -svf templates/html ~/.vim/templates/html
-ln -svf snippets/c-my.snippets ~/.vim/snippets/c-my.snippets
-ln -svf snippets/tex-my.snippets ~/.vim/snippets/tex-my.snippets
-ln -svf snippets/javascript-my.snippets ~/.vim/snippets/javascript-my.snippets
-ln -svf snippets/scheme-my.snippets ~/.vim/snippets/scheme-my.snippets
-ln -svf snippets/html-my.snippets ~/.vim/snippets/html-my.snippets
-ln -svf python.vim ~/.vim/ftplugin/python.vim
-ln -sfv gvimrc $HOME/.gvimrc
-ln -sfv vimrc $HOME/.vimrc
-ln -sfv xinitrc $HOME/.xinitrc
-ln -sfv xserverrc $HOME/.xserverrc
-ln -sfv bashrc $HOME/.bashrc
-ln -sfv bash_profile $HOME/.bash_profile
-ln -sfv bash_aliases $HOME/.bash_aliases
-ln -sfv gitconfig $HOME/.gitconfig
-ln -sfv valgrindrc $HOME/.valgrindrc
-ln -sfv astylerc $HOME/.astylerc
-ln -sfv pylintrc $HOME/.pylintrc
-ln -sfv sshconfig $HOME/.ssh/config
+HERE=$(pwd)
+ln -svf $HERE/templates/xetex ~/.vim/templates/xetex
+ln -svf $HERE/templates/python ~/.vim/templates/python
+ln -svf $HERE/templates/html ~/.vim/templates/html
+ln -svf $HERE/snippets/c-my.snippets ~/.vim/snippets/c-my.snippets
+ln -svf $HERE/snippets/tex-my.snippets ~/.vim/snippets/tex-my.snippets
+ln -svf $HERE/snippets/javascript-my.snippets ~/.vim/snippets/javascript-my.snippets
+ln -svf $HERE/snippets/scheme-my.snippets ~/.vim/snippets/scheme-my.snippets
+ln -svf $HERE/snippets/html-my.snippets ~/.vim/snippets/html-my.snippets
+ln -svf $HERE/python.vim ~/.vim/ftplugin/python.vim
+ln -sfv $HERE/gvimrc $HOME/.gvimrc
+ln -sfv $HERE/vimrc $HOME/.vimrc
+ln -sfv $HERE/xinitrc $HOME/.xinitrc
+ln -sfv $HERE/xserverrc $HOME/.xserverrc
+ln -sfv $HERE/bashrc $HOME/.bashrc
+ln -sfv $HERE/bash_profile $HOME/.bash_profile
+ln -sfv $HERE/bash_aliases $HOME/.bash_aliases
+ln -sfv $HERE/gitconfig $HOME/.gitconfig
+ln -sfv $HERE/valgrindrc $HOME/.valgrindrc
+ln -sfv $HERE/astylerc $HOME/.astylerc
+ln -sfv $HERE/pylintrc $HOME/.pylintrc
+ln -sfv $HERE/sshconfig $HOME/.ssh/config
