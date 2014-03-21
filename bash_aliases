@@ -72,6 +72,7 @@ alias m="vim mail.nv"
 alias p=python
 alias p2=python2
 alias cltex="rm -f *.{acn,acr,alg,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,glg,glo,gls,idx,ilg,ind,ist,lof,log,lot,maf,mtc,mtc0,nav,nlo,out,pdfsync,ps,run.xml,snm,synctex.gz,toc,vrb,xdy,tdo}"
+alias vimeo-dl='youtube-dl -f h264-hd'
 
 getpkg() {
 	time svn co svn://svn.archlinux.org/packages/$1/trunk $1

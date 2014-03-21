@@ -12,6 +12,7 @@ Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-speeddating.git'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'wakatime/vim-wakatime'
 Bundle 'gcmt/wildfire.vim'
@@ -184,3 +185,4 @@ let g:syntastic_python_flake8_args="--max-complexity 13"
 let g:syntastic_python_pylint_args="-d C0325"
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMRU'
+let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "it"]

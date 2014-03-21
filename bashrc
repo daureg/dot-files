@@ -72,7 +72,7 @@ export PS1="\
 \e[1;35m \$(uptime | awk '{print \$3;}'|tr -d ',')\e[m |\
 \e[0;36m \$(df -BM|grep sda9| awk '{print \$4;}')\e[m |\
 \e[1;36m \$(free -m|grep 'cache:'| awk '{print \$4;}')Mo\e[m |\
-\e[1;31m \$(cut -c-2 /sys/class/thermal/thermal_zone0/temp)°C\e[m |\
+\e[1;31m \$([[ -s /sys/class/thermal/thermal_zone0/temp ]] && cut -c-2 /sys/class/thermal/thermal_zone0/temp)°C\e[m |\
 \e[1;34m \W \e[m\n"
 [[ -s /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
 export GPODDER_HOME=/home/orphee/data/podcast

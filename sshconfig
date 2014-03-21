@@ -13,3 +13,8 @@ Host force
 Host triton
     user lefalg1
     ProxyCommand ssh kosh -W %h:%p
+Host james
+	hostname james.ics.hut.fi
+	user lefag
+	LocalForward 1234 proxy.ics.hut.fi:8080
+	ForwardX11 yes
