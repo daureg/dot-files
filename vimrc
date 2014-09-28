@@ -15,7 +15,35 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-speeddating.git'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'wakatime/vim-wakatime'
-Bundle 'gcmt/wildfire.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'terryma/vim-expand-region'
+" Bundle 'dhruvasagar/vim-table-mode'
+Bundle 'machakann/vim-patternjump'
+Bundle 'matze/vim-move'
+Bundle 'tpope/vim-vinegar'
+" Bundle 'amix/vim-zenroom'
+Bundle 'chrisbra/DistractFree'
+Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'sheerun/vim-polyglot'
+Bundle 'ConvertBase.vim'
+Bundle 'KabbAmine/vCoolor.vim'
+Bundle 'vim-scripts/DoxygenToolkit.vim'
+Bundle 'marijnh/tern_for_vim'
+Bundle 'othree/javascript-libraries-syntax.vim'
+Bundle "pangloss/vim-javascript"
+Bundle 'dart-lang/dart-vim-plugin'
+
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+
+" Track the engine.
+Bundle 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Bundle 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-z>"
+let g:UltiSnipsJumpBackwardTrigger="<s-z>"
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
@@ -60,7 +88,6 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 endif
-
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
@@ -105,23 +132,7 @@ else
   set autoindent		" always set autoindenting on
 endif " has("autocmd")
 
-
 nmap ,t :ToggleWord<CR>
-" Ouvre une url donné en argument
-:command -bar -nargs=1 OpenURL :!firefox <args>
-function! Browser ()
-  let line0 = getline (".")
-  let line = matchstr (line0, "http[^ ]*")
-  :if line==""
-  let line = matchstr (line0, "ftp[^ ]*")
-  :endif
-  :if line==""
-  let line = matchstr (line0, "file[^ ]*")
-  :endif
-  let line = escape (line, "#?&;|%")
-  exec ':silent !firefox ' . "\"" . line . "\""
-endfunction
-vmap ,c :call Browser()<CR>"
 
 " Utilise Ctrl-Tab pour changer d'onglets
 map <C-Tab> gt
@@ -176,8 +187,9 @@ set matchtime=4
 " set colorcolumn=85
 inoremap jj <ESC>
 set laststatus=0
-" change the mapleader from \ to ,
+" change the mapleader from \ to space bar
 let mapleader=","
+set timeoutlen=300
 let g:EasyMotion_leader_key = '<Leader>'
 let g:netrw_browsex_viewer= "firefox"
 let g:syntastic_python_checkers=['flake8', 'pylint']
@@ -185,4 +197,26 @@ let g:syntastic_python_flake8_args="--max-complexity 13"
 let g:syntastic_python_pylint_args="-d C0325"
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMRU'
-let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "it"]
+
+
+" from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>w :w<CR>
+vmap <Leader>y "+y
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+" let g:ctrlp_use_caching = 0
+" vmap <Enter> <Plug>(expand_region_expand)
+" vmap <C-Enter> <Plug>(expand_region_shrink)
+let g:table_mode_tableize_map = '<Leader>mt'
+let g:table_mode_echo_cell_map = '!'
+imap <C-Z> <Plug>snipMateNextOrTrigger
+smap <C-Z> <Plug>snipMateNextOrTrigger
+let b:javascript_fold = 0
+nmap Q @q

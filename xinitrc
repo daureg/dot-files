@@ -72,10 +72,14 @@ function start_awesome() {
 function start_e17() {
 	exec  /usr/bin/enlightenment_start
 }
+function start_mate() {
+	exec mate-session
+}
 
 # exec $1
 case $SESSION in
 	xfce) start_xfce ;;
+	mate) start_mate ;;
 	e17) start_e17 ;;
 	gnome) start_gnome ;;
 	fluxbox) start_fluxbox ;;

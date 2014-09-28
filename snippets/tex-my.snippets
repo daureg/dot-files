@@ -11,8 +11,7 @@ snippet glos
 snippet ifig
 	\begin{figure}[hbtp]
 	\includegraphics[width=\textwidth]{${1:name}}
-	\label{fig:${2:$1}}
-	\caption[${3:short}]{${4:long}}
+	\caption[${3:short}]{${4:long}. \label{fig:${2:$1}}}
 	\end{figure}
 	${5}
 snippet ft

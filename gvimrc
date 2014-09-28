@@ -1,7 +1,7 @@
 set background=dark
 colorscheme kib_darktango
 if has("gui_gtk2")
-	set guifont=Inconsolata-g\ For\ Powerline\ 14
+	set guifont=Inconsolata-g\ 14
 endif
 
 let g:indentLine_color_gui = '#80776b'
@@ -13,3 +13,4 @@ function! ToggleFullScreen()
 endfunction
 nnoremap <M-f> :call ToggleFullScreen()<CR>
 inoremap <M-f> <C-\><C-O>:call ToggleFullScreen()<CR>
+set guiheadroom=0

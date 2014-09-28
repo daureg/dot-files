@@ -11,6 +11,7 @@ alias ll='ls -larht --color=auto'
 alias g='grep --color=auto'
 alias ct='clear && time'
 alias d='colordiff -Naurp'
+alias wd="wdiff -n -w $'\033[41m' -x $'\033[0m' -y $'\033[42m' -z $'\033[0m'"
 alias mkdir='mkdir -pv'
 alias ping='ping -c 5'
 alias hist='history | grep'
@@ -22,6 +23,7 @@ if [ $UID -ne 0 ]; then
     alias root='sudo su'
     alias reboot='sudo reboot'
     alias halt='sudo halt'
+    alias sv='sudo vim'
 fi
 # safety features
 alias chown='chown --preserve-root'
@@ -31,7 +33,6 @@ alias chgrp='chgrp --preserve-root'
 alias sduo=sudo
 alias rst='sudo reboot'
 alias stop='sudo shutdown -h now'
-alias sv='sudo vim'
 
 # pacman
 alias pacman='pacman'
@@ -66,27 +67,20 @@ alias gramf='java -jar ~/LT/languagetool-commandline.jar -l fr'
 alias pclm='pkg-config --modversion'
 alias serv='sudo /etc/rc.d/httpd start && sudo /etc/rc.d/mysqld start'
 if [ -e /usr/share/vim/vim74/macros/less.sh ]; then
-alias less=/usr/share/vim/vim74/macros/less.sh
+	alias less=/usr/share/vim/vim74/macros/less.sh
 fi
 alias m="vim mail.nv"
 alias p=python
 alias p2=python2
-alias cltex="rm -f *.{acn,acr,alg,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,glg,glo,gls,idx,ilg,ind,ist,lof,log,lot,maf,mtc,mtc0,nav,nlo,out,pdfsync,ps,run.xml,snm,synctex.gz,toc,vrb,xdy,tdo}"
+alias cltex="rm -f *.{acn,acr,alg,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,glg,glo,gls,idx,ilg,ind,ist,lof,log,lot,maf,mtc,mtc0,nav,nlo,out,pdfsync,ps,run.xml,snm,synctex.gz,toc,vrb,xdy,tdo,lol,tps,tcp}"
 alias vimeo-dl='youtube-dl -f h264-hd'
-
-getpkg() {
-	time svn co svn://svn.archlinux.org/packages/$1/trunk $1
-	time svn co svn://svn.archlinux.org/community/$1/trunk $1
-}
+alias t='vim ~/talk'
 
 tbz() {
 	time tar caf `basename $1`.tar.bz2 `basename $1`
 }
 tgz() {
 	time tar caf `basename $1`.tar.gz `basename $1`
-}
-tlz() {
-	time tar caf `basename $1`.tar.lzma `basename $1`
 }
 sopcast() {
 	sp-sc $1 3908 8908 > /dev/null &
@@ -168,41 +162,6 @@ bench3d() {
 	glxgears & sleep 26
 	killall glxgears
 }
-extract() {
-    local c e i
-
-    (($#)) || return
-
-    for i; do
-        c=''
-        e=1
-
-        if [[ ! -r $i ]]; then
-            echo "$0: file is unreadable: \`$i'" >&2
-            continue
-        fi
-
-        case $i in
-        *.t@(gz|lz|xz|b@(2|z?(2))|a@(z|r?(.@(Z|bz?(2)|gz|lzma|xz)))))
-               c='bsdtar xvf';;
-        *.7z)  c='7z x';;
-        *.Z)   c='uncompress';;
-        *.bz2) c='bunzip2';;
-        *.exe) c='cabextract';;
-        *.gz)  c='gunzip';;
-        *.rar) c='unrar x';;
-        *.xz)  c='unxz';;
-        *.zip) c='unzip';;
-        *)     echo "$0: unrecognized file extension: \`$i'" >&2
-               continue;;
-        esac
-
-        command $c "$i"
-        e=$?
-    done
-
-    return $e
-}
 man() {
 	env \
 		LESS_TERMCAP_mb=$(printf "\e[1;37m") \
@@ -221,7 +180,7 @@ cw() {
 videort() {
 	pushd ~/fs/D/videos
 	rm -f ddur
-	for i in *.{avi,webm,mp4}
+	for i in *.{avi,webm,mp4,flv,mov}
 	do
 		DUR=$(ffprobe $i 2>&1 | grep 'Duration' | awk '{print $2}'|cut -d '.' -f1);
 		echo $DUR $i >> ddur;

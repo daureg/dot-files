@@ -1,6 +1,8 @@
 #! /usr/bin/python2
 # vim: set fileencoding=utf-8
 """."""
+
 if __name__ == '__main__':
+    # pylint: disable=C0103
     import doctest
     doctest.testmod()

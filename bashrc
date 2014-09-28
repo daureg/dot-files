@@ -17,13 +17,15 @@ set -o vi
 # append commands instead of overwriting (nice for two or more sessions), 
 # add command to history after executing,
 # don't put duplicate lines in history, ignore same successive entries.
-export HISTFILESIZE=50000
-export HISTSIZE=5000
+unset HISTFILESIZE
+export HISTSIZE=50000
+export HISTFILESIZE=10000
 shopt -s histappend
-PROMPT_COMMAND='history -a'
-export HISTCONTROL=ignoredups
-export HISTCONTROL=ignoreboth
+export PROMPT_COMMAND='history -a'
+export HISTCONTROL=ignoredups:ignoreboth:erasedups
 
+# don't reference undefined variable
+# set -o nounset
 #extension
 shopt -s cdspell # Pour que bash corrige automatiquement les fautes de frappes ex: cd ~/fiml sera remplacé par cd ~/film
 #shopt -s checkwinsize # Pour que bash vérifie la taille de la fenêtre après chaque commande
@@ -76,4 +78,5 @@ export PS1="\
 \e[1;34m \W \e[m\n"
 [[ -s /etc/profile.d/autojump.bash ]] && . /etc/profile.d/autojump.bash
 export GPODDER_HOME=/home/orphee/data/podcast
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 clear
