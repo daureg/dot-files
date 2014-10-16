@@ -1,6 +1,7 @@
 # vim: ft=sh
 # find /usr/lib/ghc-7.6.3/site-local/ -name *_p.a -exec du '{}' \;|sort -n
 # pacman -Ql haskell-pandoc | cut -d ' ' -f2| grep -v "\/$"|xargs du|sort -n|tail
+alias anki='anki -b ~/.config/anki &'
 # Coreutils
 alias mm='sudo mount -v /dev/sdb ~/fs/key'
 alias ..='cd ..'
@@ -34,7 +35,12 @@ alias sduo=sudo
 alias rst='sudo reboot'
 alias stop='sudo shutdown -h now'
 
+# systemctl
+alias sls='systemctl status -t service|grep service'
+alias sbs='sudo systemctl start '
+alias ses='sudo systemctl stop '
 # pacman
+alias is='sudo pacman -S '
 alias pacman='pacman'
 alias pc='yes "o" | sudo pacman -Scc'
 alias pu='sudo pacman -U'

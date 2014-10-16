@@ -2,7 +2,7 @@
 set nocompatible
 
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'fs111/pydoc.vim'
@@ -17,21 +17,16 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'wakatime/vim-wakatime'
 Bundle 'tpope/vim-fugitive'
 Bundle 'terryma/vim-expand-region'
-" Bundle 'dhruvasagar/vim-table-mode'
-Bundle 'machakann/vim-patternjump'
 Bundle 'matze/vim-move'
-Bundle 'tpope/vim-vinegar'
-" Bundle 'amix/vim-zenroom'
-Bundle 'chrisbra/DistractFree'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'sheerun/vim-polyglot'
 Bundle 'ConvertBase.vim'
-Bundle 'KabbAmine/vCoolor.vim'
 Bundle 'vim-scripts/DoxygenToolkit.vim'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle "pangloss/vim-javascript"
-Bundle 'dart-lang/dart-vim-plugin'
+Bundle "idbrii/AsyncCommand"
+Bundle "gorkunov/smartpairs.vim"
 
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"

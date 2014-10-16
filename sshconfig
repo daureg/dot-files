@@ -1,3 +1,6 @@
+Host magnet1
+    hostname magnet1.local
+    user glefalhe
 Host kosh
     hostname kosh.aalto.fi
     user lefalg1
@@ -17,4 +20,4 @@ Host james
 	hostname james.ics.hut.fi
 	user lefag
 	LocalForward 1234 proxy.ics.hut.fi:8080
-	ForwardX11 yes
+	ForwardX11 no
