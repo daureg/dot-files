@@ -23,4 +23,5 @@ ln -sfv $HERE/gitconfig $HOME/.gitconfig
 ln -sfv $HERE/valgrindrc $HOME/.valgrindrc
 ln -sfv $HERE/astylerc $HOME/.astylerc
 ln -sfv $HERE/pylintrc $HOME/.pylintrc
+ln -sfv $HERE/tmux.conf $HOME/.tmux.conf
 ln -sfv $HERE/sshconfig $HOME/.ssh/config
