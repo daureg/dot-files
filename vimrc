@@ -1,44 +1,61 @@
 " Use Vim settings, rather then Vi settings (much better!).
 set nocompatible
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'fs111/pydoc.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rking/ag.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-speeddating.git'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'wakatime/vim-wakatime'
-Bundle 'tpope/vim-fugitive'
-Bundle 'terryma/vim-expand-region'
-Bundle 'matze/vim-move'
-Bundle 'AndrewRadev/splitjoin.vim'
-Bundle 'sheerun/vim-polyglot'
-Bundle 'ConvertBase.vim'
-Bundle 'vim-scripts/DoxygenToolkit.vim'
-Bundle 'marijnh/tern_for_vim'
-Bundle 'othree/javascript-libraries-syntax.vim'
-Bundle "pangloss/vim-javascript"
-Bundle "idbrii/AsyncCommand"
-Bundle "gorkunov/smartpairs.vim"
+" filetype off
+" set rtp+=~/.vim/bundle/Vundle.vim/
+" call vundle#begin()
+" Plugin 'gmarik/Vundle.vim'
+" Plugin 'fs111/pydoc.vim'
+" Plugin 'kien/ctrlp.vim'
+" Plugin 'Lokaltog/vim-easymotion'
+" Plugin 'rking/ag.vim'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'tomtom/tcomment_vim'
+" Plugin 'tpope/vim-surround'
+" Plugin 'tpope/vim-speeddating.git'
+" " Plugin 'Valloric/YouCompleteMe'
+" " Plugin 'wakatime/vim-wakatime'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'terryma/vim-expand-region'
+" Plugin 'matze/vim-move'
+" Plugin 'AndrewRadev/splitjoin.vim'
+" Plugin 'sheerun/vim-polyglot'
+" Plugin 'ConvertBase.vim'
+" Plugin 'vim-scripts/DoxygenToolkit.vim'
+" Plugin 'marijnh/tern_for_vim'
+" Plugin 'othree/javascript-libraries-syntax.vim'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'idbrii/AsyncCommand'
+" Plugin 'gorkunov/smartpairs.vim'
+" Plugin 'techlivezheng/vim-plugin-minibufexpl'
+" Plugin 'docunext/closetag.vim'
+" Plugin 'kristijanhusak/vim-multiple-cursors'
+" Plugin 'rust-lang/rust.vim'
+" Plugin 'phildawes/racer'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+" Plugin 'junegunn/vim-easy-align'
+" Plugin 'vim-pandoc/vim-pandoc'
+" Plugin 'vim-pandoc/vim-pandoc-syntax'
+" Plugin 'NLKNguyen/papercolor-theme'
+" " Track the engine.
+" Plugin 'SirVer/ultisnips'
+" " Snippets are separated from the engine. Add this if you want them:
+" Plugin 'honza/vim-snippets'
+" Plugin 'tpope/vim-vinegar'
+" Plugin 'junegunn/goyo.vim'
+" Plugin 'junegunn/limelight.vim'
 
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
+"Clojure
 
-" Track the engine.
-Bundle 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Bundle 'honza/vim-snippets'
+" Plugin 'guns/vim-clojure-static'
+" Plugin 'tpope/vim-salve'
+" Plugin 'tpope/vim-fireplace'
+" call vundle#end()
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-z>"
-let g:UltiSnipsJumpForwardTrigger="<c-z>"
-let g:UltiSnipsJumpBackwardTrigger="<s-z>"
+" let g:UltiSnipsExpandTrigger="<c-z>"
+" let g:UltiSnipsJumpForwardTrigger="<c-z>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-z>"
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
@@ -50,6 +67,7 @@ if has('gui_running')
 endif
 
 set background=dark
+set t_Co=256
 set textwidth=78
 set enc=utf-8
 set ff=unix
@@ -215,3 +233,32 @@ imap <C-Z> <Plug>snipMateNextOrTrigger
 smap <C-Z> <Plug>snipMateNextOrTrigger
 let b:javascript_fold = 0
 nmap Q @q
+
+" https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+let g:miniBufExplorerAutoStart = 0
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+set hidden
+let g:racer_cmd = "/usr/bin/racer"
+let $RUST_SRC_PATH="/home/orphee/pkg/devel/rustc-nightly/src/"
+"from http://blog.sanctum.geek.nz/vim-annoyances/
+nnoremap K <nop>
+
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
