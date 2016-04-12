@@ -14,6 +14,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 SESSION=xfce
 
 #aplay -q $HOME/.sounds/startup.wav &
+# aplay -q $HOME/data/music/sarajevo.wav &
 fbsetbg -a -r $HOME/data/wallpapers
 numlockx on
 setxkbmap fr oss
