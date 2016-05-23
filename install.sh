@@ -24,3 +24,5 @@ ln -sfv $HERE/valgrindrc $HOME/.valgrindrc
 ln -sfv $HERE/astylerc $HOME/.astylerc
 ln -sfv $HERE/pylintrc $HOME/.pylintrc
 ln -sfv $HERE/sshconfig $HOME/.ssh/config
+ln -sfv $HERE/latexmkrc $HOME/.latexmkrc
+ln -sfv $HERE/tmux.conf $HOME/.tmux.conf
