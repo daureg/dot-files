@@ -14,6 +14,7 @@ ln -svf $HERE/snippets/html-my.snippets ~/.vim/snippets/html-my.snippets
 ln -svf $HERE/python.vim ~/.vim/ftplugin/python.vim
 ln -sfv $HERE/gvimrc $HOME/.gvimrc
 ln -sfv $HERE/vimrc $HOME/.vimrc
+ln -sfv $HERE/nvimrc $HOME/.nvimrc
 ln -sfv $HERE/xinitrc $HOME/.xinitrc
 ln -sfv $HERE/xserverrc $HOME/.xserverrc
 ln -sfv $HERE/bashrc $HOME/.bashrc
