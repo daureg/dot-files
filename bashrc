@@ -8,7 +8,7 @@ xmodmap $usermodmap
 fi
 # disable bell
 xset -b
-export PATH=/usr/local/texlive/2014/bin/x86_64-linux:~/bin/:~/.local/bin:$PATH
+export PATH=~/bin/:~/.local/bin:$PATH
 export EDITOR=nvim
 export EMAIL="Géraud Le Falher <daureg@gmail.com>"
 export GREP_COLOR="1;32"                    # green
@@ -29,7 +29,11 @@ shopt -s histappend
 export PROMPT_COMMAND='history -a'
 export HISTCONTROL=ignoredups:ignoreboth:erasedups
 export HISTFILE="${HOME}/.history/$(date -u +%Y_%m)"
-export HISTIGNORE="fg:cd:ls:exit:clear:j *:mocp:n:ll:..:"
+## SANE HISTORY DEFAULTS ##
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:bg:fg:cd:ls:exit:clear:j *:mocp:n:ll:..:"
+# Useful timestamp format
+HISTTIMEFORMAT='%F %T '
 
 # don't reference undefined variable (it break auto completion)
 #  set -o nounset
@@ -64,17 +68,10 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_me=$'\e[0m'
 fi
 
-if grep -q Ubuntu /etc/issue ; then
-export DISTRO="ubuntu";
-else
-export DISTRO="archlinux";
-fi
-
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 bind -m vi-insert "\C-p":history-search-backward
 
-# xhost +si:localuser:$(whoami)
 export PS1="\
 \e[0;32m\D{%a %d %b}\e[m |\
 \e[1;32m \D{%T}\e[m |\
@@ -83,20 +80,8 @@ export PS1="\
 \e[1;36m \$(free -m|grep 'Mem:'| awk '{print \$7;}')Mo\e[m |\
 \e[1;31m \$([[ -s /sys/class/thermal/thermal_zone0/temp ]] && cut -c-2 /sys/class/thermal/thermal_zone0/temp)°C\e[m |\
 \e[1;34m \W \e[m\n"
-source /usr/share/autojump/autojump.bash
-export GPODDER_HOME=/home/orphee/data/podcast
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-xhost local:orphee > /dev/null
-export RUST_SRC_PATH=/home/orphee/pkg/devel/rustc-nightly/src
-eval "$(thefuck --alias)"
-export STACK_ROOT=$HOME/data/projects/haskell/stack_root
-clear
-# export PS1="\u@\h:\W\\$ "
-if [ -e /usr/share/terminfo/g/gnome-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
-export TERM=gnome-256color
-fi
-BASE16_SHELL="$HOME/base16-shell/base16-mocha.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 
 # Sensible Bash - An attempt at saner Bash defaults
 # Maintainer: mrzool <http://mrzool.cc>
@@ -119,11 +104,6 @@ bind "set completion-map-case on"
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 
-## SANE HISTORY DEFAULTS ##
-# Don't record some commands
-export HISTIGNORE="&:[ ]*:bg:fg:cd:ls:exit:clear:j *:mocp:n:ll:..:"
-# Useful timestamp format
-HISTTIMEFORMAT='%F %T '
 
 ## BETTER DIRECTORY NAVIGATION ##
 
@@ -139,6 +119,25 @@ shopt -s cdspell 2> /dev/null
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working
 # directory, in home and in the ~/projects folder
 CDPATH="."
+
+# The part below is quite specific to a specific computer
+source /usr/share/autojump/autojump.bash
+if grep -q Ubuntu /etc/issue ; then
+export DISTRO="ubuntu";
+else
+export DISTRO="archlinux";
+fi
+eval "$(thefuck --alias)"
+export GPODDER_HOME=/home/orphee/data/podcast
+export JULIA_PKGDIR=/home/orphee/data/projects/julia
+export PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH
+export RUST_SRC_PATH=/home/orphee/pkg/devel/rustc-nightly/src
+export STACK_ROOT=$HOME/data/projects/haskell/stack_root
+xhost local:orphee > /dev/null
+if [ -e /usr/share/terminfo/g/gnome-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
+export TERM=gnome-256color
+fi
+BASE16_SHELL="$HOME/base16-shell/base16-mocha.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 eval "$(rash init)"
 clear
-export JULIA_PKGDIR=/home/orphee/data/projects/julia
