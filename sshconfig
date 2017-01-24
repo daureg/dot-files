@@ -1,6 +1,27 @@
+TCPKeepAlive=yes
+ServerAliveInterval=15
+ServerAliveCountMax=6
+Compression=no
+# ControlMaster auto
+# ControlPath /tmp/%r@%h:%p
+# ControlPersist yes
+
 Host magnet1
     hostname magnet1.local
-    user glefalhe
+    user geraud
+Host magnet2
+    hostname magnet2.local
+    user geraud
+Host magnet3
+    hostname magnet3.local
+    user geraud
+Host magnet4
+    hostname magnet4.local
+    user geraud
+Host room
+    hostname gateway.egilbert.eu
+    user orphee
+    port 22222
 Host kosh
     hostname kosh.aalto.fi
     user lefalg1
@@ -13,6 +34,13 @@ Host force
     hostname force.aalto.fi
     user lefalg1
     port 22
+Host gw
+    hostname gw.lille.inria.fr
+    user glefalhe
+    port 22
+Host ragnet4
+    user glefalhe
+    ProxyCommand ssh glefalhe@gw.lille.inria.fr -W %h:%p
 Host triton
     user lefalg1
     ProxyCommand ssh kosh -W %h:%p
@@ -21,3 +49,9 @@ Host james
 	user lefag
 	LocalForward 1234 proxy.ics.hut.fi:8080
 	ForwardX11 no
+Host kiran
+    user cloud-user
+    hostname 193.166.24.158
+    IdentityFile ~/.ssh/cloud.key
+Host *
+    GSSAPIAuthentication no
