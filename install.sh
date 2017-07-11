@@ -6,6 +6,7 @@ HERE=$(pwd)
 ln -svf $HERE/templates/xetex ~/.vim/templates/xetex
 ln -svf $HERE/templates/python ~/.vim/templates/python
 ln -svf $HERE/templates/html ~/.vim/templates/html
+ln -svf $HERE/templates/git_commit_template ~/.config/git_commit_template
 ln -svf $HERE/snippets/c-my.snippets ~/.vim/snippets/c-my.snippets
 ln -svf $HERE/snippets/tex-my.snippets ~/.vim/snippets/tex-my.snippets
 ln -svf $HERE/snippets/javascript-my.snippets ~/.vim/snippets/javascript-my.snippets

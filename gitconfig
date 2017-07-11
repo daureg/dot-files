@@ -2,7 +2,7 @@
 	email = daureg@gmail.com
 	name = Géraud Le Falher
 [diff]
-	tool = vimdiff
+	tool = gvimdiff
 [color]
 	diff = auto
 	status = auto
@@ -16,4 +16,19 @@
 	default = matching
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	up = "!git remote update -p; git merge --ff-only @{u}"
+	uup = "!git remote update -p; git merge --ff-only @{u}"
+# http://gggritso.com/human-git-aliases
+	branches = branch -a
+	tags = tag
+	stashes = stash list
+
+	unstage = reset -q HEAD --
+	discard = checkout --
+	uncommit = reset --mixed HEAD~
+	amend = commit --amend
+
+	precommit = diff --cached --diff-algorithm=minimal -w
+	undo = "!f() { \\\n    git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; \\\n}; f"
+	up = pull --rebase --autostash
+[commit]
+	template = ~/.config/git_commit_template
