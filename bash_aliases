@@ -78,10 +78,11 @@ alias sm4='ssh magnet4'
 alias laptop='sh ~/.screenlayout/just_laptop.sh'
 alias fpy1='ssh -fxNL 8898:localhost:8888 magnet1'
 alias fpy4='ssh -fxNL 8899:localhost:8888 magnet4'
-alias mrem='sshfs glefalhe@magnet4:/home/magnet/glefalhe/magnet/veverica remote'
+alias mrem='sshfs geraud@magnet4:/home/magnet/geraud/magnet/veverica remote'
+alias muptime='for i in {1..4}; do ssh magnet$i uptime; done'
 
 # Misc
-alias gram='java -jar ~/LT/languagetool-commandline.jar -l en-GB'
+alias gram='java -jar ~/LT/languagetool-commandline.jar -l en-US'
 alias gramf='java -jar ~/LT/languagetool-commandline.jar -l fr'
 alias pclm='pkg-config --modversion'
 alias serv='sudo /etc/rc.d/httpd start && sudo /etc/rc.d/mysqld start'
@@ -95,6 +96,11 @@ alias cltex="rm -f *.{acn,acr,alg,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,glg,glo,gl
 alias vimeo-dl='youtube-dl -f h264-hd'
 alias t='nvim -c ":set spell tw=0" ~/talk'
 alias prm='source $HOME/bin/prm.sh'
+alias msg="chromium http://www.messenger.com &"
+# set headphones volume
+shv() {
+    pactl set-sink-volume 1 $1%
+}
 rsize() {
     curl -sLI $1 |grep Len|cut -d ' ' -f2
 }
@@ -173,7 +179,7 @@ hgl() {
 
 start_ssh() {
 	local SSH_ENV="$HOME/.ssh/environment"
-	/usr/bin/ssh-agent | sed 's/^echo/#echo/' > "$SSH_ENV"
+	/usr/bin/ssh-agent | sed 's/^echo/#echo/' >| "$SSH_ENV"
 	chmod 600 "$SSH_ENV"
 	. "$SSH_ENV" > /dev/null
 	/usr/bin/ssh-add
@@ -227,5 +233,6 @@ tmongo() {
 	cd ~/flitest
 }
 arte() {
-    youtube-dl -f HTTP_MP4_SQ_1 "http://www.arte.tv/guide/fr/064094-$1-A/arte-journal"
+    # youtube-dl -f HTTP_MP4_SQ_1 "http://www.arte.tv/guide/fr/064094-$1-A/arte-journal"
+    youtube-dl -f HTTPS_SQ_1 "http://www.arte.tv/fr/videos/071825-$1-A/arte-journal"
 }
