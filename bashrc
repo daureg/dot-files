@@ -24,16 +24,17 @@ set -o vi
 # don't put duplicate lines in history, ignore same successive entries.
 unset HISTFILESIZE
 export HISTSIZE=50000
-export HISTFILESIZE=10000
+export HISTFILESIZE=50000
 shopt -s histappend
-export PROMPT_COMMAND='history -a'
-export HISTCONTROL=ignoredups:ignoreboth:erasedups
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"   # mem/file sync
+export HISTCONTROL=ignoredups:ignoreboth:erasedups:ignorespace
 export HISTFILE="${HOME}/.history/$(date -u +%Y_%m)"
 ## SANE HISTORY DEFAULTS ##
 # Don't record some commands
 export HISTIGNORE="&:[ ]*:bg:fg:cd:ls:exit:clear:j *:mocp:n:ll:..:"
 # Useful timestamp format
 HISTTIMEFORMAT='%F %T '
+
 
 # don't reference undefined variable (it break auto completion)
 #  set -o nounset
@@ -73,6 +74,7 @@ bind '"\e[B":history-search-forward'
 bind -m vi-insert "\C-p":history-search-backward
 
 export PS1="\
+\033]0;bash\007\
 \e[0;32m\D{%a %d %b}\e[m |\
 \e[1;32m \D{%T}\e[m |\
 \e[1;35m \$(uptime | awk '{print \$3;}'|tr -d ',')\e[m |\
@@ -130,7 +132,7 @@ fi
 eval "$(thefuck --alias)"
 export GPODDER_HOME=/home/orphee/data/podcast
 export JULIA_PKGDIR=/home/orphee/data/projects/julia
-export PATH=/usr/local/texlive/2014/bin/x86_64-linux:$PATH
+export PATH=/usr/local/texlive/2017/bin/x86_64-linux:$PATH
 export RUST_SRC_PATH=/home/orphee/pkg/devel/rustc-nightly/src
 export STACK_ROOT=$HOME/data/projects/haskell/stack_root
 xhost local:orphee > /dev/null
@@ -141,3 +143,12 @@ BASE16_SHELL="$HOME/base16-shell/base16-mocha.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 eval "$(rash init)"
 clear
+
+# add this configuration to ~/.bashrc
+export HH_CONFIG=hicolor         # get more colors
+# if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
+if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-ahh -- \C-j"'; fi
+
+export ANDROID_HOME=${HOME}/Android/Sdk export
+PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
