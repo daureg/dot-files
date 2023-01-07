@@ -8,7 +8,8 @@ xmodmap $usermodmap
 fi
 # disable bell
 xset -b
-export PATH=~/bin/:~/.local/bin:$PATH
+export PATH=~/bin:~/.local/bin:$PATH:~/.local/share/coursier/bin
+
 export EDITOR=nvim
 export EMAIL="Géraud Le Falher <daureg@gmail.com>"
 export GREP_COLOR="1;32"                    # green
@@ -73,15 +74,24 @@ bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 bind -m vi-insert "\C-p":history-search-backward
 
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
 export PS1="\
 \033]0;bash\007\
 \e[0;32m\D{%a %d %b}\e[m |\
 \e[1;32m \D{%T}\e[m |\
 \e[1;35m \$(uptime | awk '{print \$3;}'|tr -d ',')\e[m |\
-\e[0;36m \$(df -BM|grep sda6| awk '{print \$4;}')\e[m |\
 \e[1;36m \$(free -m|grep 'Mem:'| awk '{print \$7;}')Mo\e[m |\
 \e[1;31m \$([[ -s /sys/class/thermal/thermal_zone0/temp ]] && cut -c-2 /sys/class/thermal/thermal_zone0/temp)°C\e[m |\
+\e[1;33m \$(parse_git_branch)\e[m |\
 \e[1;34m \W \e[m\n"
+
+# \e[0;36m \$(df -BM|grep sda6| awk '{print \$4;}')\e[m |\
+# export PS1="\
+# \033]0;bash\007\
+# \e[0;32m\d \D{%R}\e[m |\
+# \e[1;34m \W \e[m\n❯ "
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 
@@ -123,32 +133,49 @@ shopt -s cdspell 2> /dev/null
 CDPATH="."
 
 # The part below is quite specific to a specific computer
-source /usr/share/autojump/autojump.bash
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 if grep -q Ubuntu /etc/issue ; then
 export DISTRO="ubuntu";
 else
 export DISTRO="archlinux";
 fi
-eval "$(thefuck --alias)"
-export GPODDER_HOME=/home/orphee/data/podcast
-export JULIA_PKGDIR=/home/orphee/data/projects/julia
-export PATH=/usr/local/texlive/2017/bin/x86_64-linux:$PATH
-export RUST_SRC_PATH=/home/orphee/pkg/devel/rustc-nightly/src
-export STACK_ROOT=$HOME/data/projects/haskell/stack_root
 xhost local:orphee > /dev/null
 if [ -e /usr/share/terminfo/g/gnome-256color ] && [ "$COLORTERM" == "xfce4-terminal" ]; then
 export TERM=gnome-256color
 fi
-BASE16_SHELL="$HOME/base16-shell/base16-mocha.dark.sh"
+BASE16_SHELL="$HOME/base16-shell/scripts/base16-mocha.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-eval "$(rash init)"
-clear
+eval "$(dircolors -b)"
 
 # add this configuration to ~/.bashrc
 export HH_CONFIG=hicolor         # get more colors
 # if this is interactive shell, then bind hh to Ctrl-r (for Vi mode check doc)
-if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-ahh -- \C-j"'; fi
+# if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-ahh -- \C-j"'; fi
+source /usr/share/autojump/autojump.bash
 
-export ANDROID_HOME=${HOME}/Android/Sdk export
-PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+export BAT_THEME=DarkNeon
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(nvim {})+abort'"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
+
+
+# https://makandracards.com/makandra/72209-how-to-install-npm-packages-globally-without-sudo-on-linux
+export NPM_PACKAGES="$HOME/.npm-packages"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+export NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Use bash-completion, if available
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
+clear
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+  source $(pyenv root)/completions/pyenv.bash
+fi
+
+eval "$(direnv hook bash)"

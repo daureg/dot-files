@@ -1,8 +1,15 @@
 # vim: ft=sh
 # find /usr/lib/ghc-7.6.3/site-local/ -name *_p.a -exec du '{}' \;|sort -n
 # pacman -Ql haskell-pandoc | cut -d ' ' -f2| grep -v "\/$"|xargs du|sort -n|tail
+alias vs="codium --enable-proposed-api eamodio.gitlens --enable-proposed-api Github.vscode-pull-request-github --enable-proposed-api ms-toolsai.jupyter"
+alias lg="xfce4-session-logout --suspend"
+alias mpv="LD_LIBRARY_PATH=$HOME/lib mpv"
+alias wget='wget -c'
 alias dw='aria2c -x2 $(xclip -o)'
-alias n='nvim'
+alias s3dw='aws s3 cp $(xclip -selection clipboard -o) .'
+alias n='nvim -i ~/.local/share/nvim/shada/main.shada'
+alias c='clear -x'
+alias serve='python -m http.server  8000'
 alias anki='anki -b ~/.config/anki &'
 # Coreutils
 alias mm='sudo mount -v /dev/sdb ~/fs/key'
@@ -11,15 +18,17 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ls='ls --color=auto'
 alias ll='ls -larht --color=auto'
-alias g='grep --color=auto --exclude-dir=\.svn'
+alias llt='ls -larht --color=auto| tail'
+alias g=rg
+# alias g='grep --color=auto --exclude-dir=\.svn'
 alias ct='clear && time'
 alias d='colordiff -Naurp'
 alias wd="wdiff -n -w $'\033[41m' -x $'\033[0m' -y $'\033[42m' -z $'\033[0m'"
 alias mkdir='mkdir -pv'
-alias ping='ping -c 5'
+alias ping='ping -Ac 5'
 # alias hist='cat $HOME/.history/* | grep'
 alias openports='netstat --all --numeric --programs --inet'
-alias pg='ps -Af | grep'
+alias pg='rg -t py'
 # privileged access
 if [ $UID -ne 0 ]; then
     alias scat='sudo cat'
@@ -45,7 +54,8 @@ alias ses='sudo systemctl stop '
 alias is='sudo pacman -S '
 alias pacman='pacman'
 alias pc='yes "o" | sudo pacman -Scc'
-alias pu='sudo pacman -U'
+alias pu="pip install -U --upgrade-strategy=eager"
+# alias pu='sudo pacman -U'
 alias pd='sudo pacman -Rns'
 alias pdd='sudo pacman -Rdns'
 alias mpkg='ct makepkg -L'
@@ -90,13 +100,25 @@ if [ -e /usr/share/vim/vim74/macros/less.sh ]; then
 	alias less=/usr/share/vim/vim74/macros/less.sh
 fi
 alias m="nvim mail.nv"
-alias p=python
+alias p=python3
 alias p2=python2
 alias cltex="rm -f *.{acn,acr,alg,aux,bbl,bcf,blg,dvi,fdb_latexmk,fls,glg,glo,gls,idx,ilg,ind,ist,lof,log,lot,maf,mtc,mtc0,nav,nlo,out,pdfsync,ps,run.xml,snm,synctex.gz,toc,vrb,xdy,tdo,lol,tps,tcp,thm}"
 alias vimeo-dl='youtube-dl -f h264-hd'
 alias t='nvim -c ":set spell tw=0" ~/talk'
 alias prm='source $HOME/bin/prm.sh'
-alias msg="chromium http://www.messenger.com &"
+alias msg="chromium-browser http://www.messenger.com &"
+alias pylama=pylava
+alias cpb='black -t py39 -l 100'
+alias cpi='reorder-python-imports --py39-plus'
+alias cpl='flake8 --config ~/work/boost/model-builder/setup.cfg'
+alias cpm='mypy --strict'
+alias cpt='pytype --strict-import --use-enum-overlay -V 3.9'
+alias ncdu="ncdu --color dark -rr -x --exclude .git"
+alias get-ip='curl -sX GET "https://httpbin.org/get" -H "accept: application/json" | jq ".origin"'
+alias gg="google-chrome"
+alias scas="pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo"
+alias senc="pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo"
+
 # set headphones volume
 shv() {
     pactl set-sink-volume 1 $1%
@@ -104,7 +126,31 @@ shv() {
 rsize() {
     curl -sLI $1 |grep Len|cut -d ' ' -f2
 }
-
+wiki_note() {
+    pushd ~/work/boost/wiki
+    $EDITOR -c "set spelllang=en spell cole=0 linebreak tw=0 ts=4 sw=4 et" -c "MarkdownPreview" $(whoami)_$(date +"%Y%m%d_%H%M").md
+    git status
+}
+webm2gif() {
+    ffmpeg -y -i $1 -vf palettegen _tmp_palette.png
+    ffmpeg -y -i $1 -i _tmp_palette.png -filter_complex paletteuse -r 10  ${1%.webm}.gif
+    rm _tmp_palette.png
+}
+ns3() {
+    T=$(mktemp)
+    aws s3 cp $(xclip -selection clipboard -o) $T
+    nvim $T
+    rm $T
+}
+dbjob() {
+    run_id=$(databricks runs submit --json-file $1 |jq .run_id)
+    jurl=$(databricks runs get --run-id $run_id | jq .run_page_url | sed 's,#,/#,g' | sed 's,",,g')
+    echo $jurl
+    xdg-open $jurl
+}
+dbstat() {
+	databricks runs get --run-id $1 |jq '(.start_time |= (. / 1000 | strftime("%Y-%m-%d %H:%M:%S")) ) | {start_time, status: .state.life_cycle_state, run_page_url}'
+}
 tbz() {
 	time tar caf `basename $1`.tar.bz2 `basename $1`
 }
@@ -216,8 +262,20 @@ man() {
 cw() {
 	cat $1 |tr A-Z a-z|tr ' ' '\n'| tr -d "?!.;,…0-9'"|sort|uniq -c|sort -n
 }
+awlogin() {
+	pushd ~/work/bootcamp
+	pipenv run zaws login
+	popd
+    }
+approve_cluster() {
+	pushd ~/work/bootcamp
+	pipenv run zaws login
+	pipenv run zkubectl login search
+	pipenv run zkubectl cluster-access approve gchandrashek
+	popd
+}
 videort() {
-	pushd ~/fs/D/videos
+	pushd ~/Videos
 	rm -f ddur
 	for i in *.{mp3,avi,webm,mkv,mp4,flv,mov}
 	do
@@ -235,4 +293,7 @@ tmongo() {
 arte() {
     # youtube-dl -f HTTP_MP4_SQ_1 "http://www.arte.tv/guide/fr/064094-$1-A/arte-journal"
     youtube-dl -f HTTPS_SQ_1 "http://www.arte.tv/fr/videos/071825-$1-A/arte-journal"
+}
+ff() {
+fd --type f | fzf --preview-window right:55% --preview '[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --color always {} || cat {}) 2> /dev/null | head -200'
 }
