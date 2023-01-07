@@ -1,8 +1,9 @@
 [user]
-	email = daureg@gmail.com
+	email = geraud.le.falher@zalando.de
 	name = Géraud Le Falher
 [diff]
 	tool = gvimdiff
+	algorithm = histogram
 [color]
 	diff = auto
 	status = auto
@@ -10,8 +11,23 @@
 	ui = true
 [merge]
 	tool = gvimdiff
+	conflictStyle = zdiff3
 [core]
 	excludesfile = ~/.gitignore
+	autocrlf = input
+	pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
 [push]
 	default = matching
 [alias]
@@ -23,7 +39,6 @@
 	stashes = stash list
 
 	unstage = reset -q HEAD --
-	discard = checkout --
 	uncommit = reset --mixed HEAD~
 	amend = commit --amend
 
@@ -32,3 +47,18 @@
 	up = pull --rebase --autostash
 [commit]
 	template = ~/.config/git_commit_template
+# [icdiff]
+# 	options = 
+[url "git@github.bus.zalan.do:"]
+	insteadOf = https://github.bus.zalan.do
+[fetch]
+	prune = true
+[hub]
+	host = github.bus.zalan.do
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[init]
+	defaultBranch = main

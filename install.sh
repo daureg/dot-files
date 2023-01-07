@@ -28,5 +28,4 @@ ln -sfv $HERE/pylintrc $HOME/.pylintrc
 ln -sfv $HERE/tmux.conf $HOME/.tmux.conf
 ln -sfv $HERE/sshconfig $HOME/.ssh/config
 ln -sfv $HERE/latexmkrc $HOME/.latexmkrc
-ln -sfv $HERE/tmux.conf $HOME/.tmux.conf
 ln -sfv $HERE/config.fish $HOME/.config/fish/config.fish
