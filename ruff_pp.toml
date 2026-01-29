@@ -1,0 +1,58 @@
+[tool.ruff]
+line-length = 88
+indent-width = 4
+target-version = "py312"
+preview = true
+output-format = "concise"
+unsafe-fixes = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D10",
+    "D20",
+    "AIR3", # still using airflow 2.7
+    "ANN", # flake8-annotations
+    "CPY", # flake8-copyright
+    # "PL", # Pylint
+    "T20", # flake8-print
+    "YTT", # flake8-2020
+    "DOC201",
+    # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+    "W191",
+    "E111",
+    "E114",
+    "E117",
+    "D206",
+    "D300",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "COM812",
+    "COM819",
+    ]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+preview = true
+
+# Allow unused variables when underscore-prefixed.
+# dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pycodestyle]
+max-doc-length = 88
+
+[tool.ruff.lint.isort]
+force-single-line = true
+# lines-after-imports = 2
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = false
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = "dynamic"

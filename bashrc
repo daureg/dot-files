@@ -20,7 +20,7 @@ set -o vi
 # History file: (must haves for those that use the command line alot)
 # Increase history file size,
 # increase number of commands saved (default: 500),
-# append commands instead of overwriting (nice for two or more sessions), 
+# append commands instead of overwriting (nice for two or more sessions),
 # add command to history after executing,
 # don't put duplicate lines in history, ignore same successive entries.
 unset HISTFILESIZE
@@ -122,7 +122,7 @@ bind "set show-all-if-ambiguous on"
 # Prepend cd to directory names automatically
 shopt -s autocd 2> /dev/null
 # Correct spelling errors during tab-completion
-shopt -s dirspell 
+shopt -s dirspell
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2> /dev/null
 

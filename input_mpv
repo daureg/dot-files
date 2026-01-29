@@ -1,0 +1,6 @@
+# https://github.com/mpv-player/mpv/issues/833
+a add speed 0.1
+b add speed -0.1
+AXIS_UP		frame-step
+AXIS_DOWN	frame-back-step
+ctrl+r cycle_values video-rotate "90" "180" "270" "0"

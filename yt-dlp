@@ -1,0 +1,10 @@
+--output /home/geraud.le.falher@zalando.de/Videos/%(title)s_%(extractor)s.%(ext)s
+--restrict-filenames
+--format bestvideo[height<=?1440][vcodec!*=av01]+bestaudio/best[height<=?1440]
+--embed-metadata
+--sponsorblock-remove default
+--write-sub
+--sub-format srt
+--sub-lang en
+--embed-subs
+--no-overwrites

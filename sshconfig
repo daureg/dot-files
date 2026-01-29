@@ -11,9 +11,31 @@ Host slurm
 
 Host github.bus.zalan.do
   IdentityFile ~/.ssh/id_rsa
+# Host github.com
+#   IdentityFile ~/.ssh/github_rsa
+
+Host pi
+  HostName 192.168.0.160
+  IdentityFile ~/.ssh/cile
+  User glefalher
 
 Host github.com
-  IdentityFile ~/.ssh/github_rsa
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/work
+    IdentitiesOnly yes
+
+Host github.com-personal
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/github_rsa
+    IdentitiesOnly yes
+
+Host vps
+    HostName 144.91.70.118
+    User root
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/honor
 
 Host *
     GSSAPIAuthentication no

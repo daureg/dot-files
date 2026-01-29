@@ -48,7 +48,7 @@
 [commit]
 	template = ~/.config/git_commit_template
 # [icdiff]
-# 	options = 
+# 	options =
 [url "git@github.bus.zalan.do:"]
 	insteadOf = https://github.bus.zalan.do
 [fetch]

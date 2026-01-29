@@ -1,19 +1,19 @@
 snippet xml
-	<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
-	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+	<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 	${2}
 snippet xht
-	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr"> 
+	<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
 	${1}
 	</html>
 
 snippet xhead
 	<head>
 		<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
-		<meta name="author" content="Géraud Le Falher" /> 
+		<meta name="author" content="Géraud Le Falher" />
 		<meta name="description" content="${1}" />
 		<meta name="keywords" content="${2}" />
-		<link href="${3}.css" rel="stylesheet" media="screen" type="text/css" /> 
+		<link href="${3}.css" rel="stylesheet" media="screen" type="text/css" />
 		<title>${4:`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`}</title>
 	</head>
 	${5}
@@ -30,5 +30,3 @@ snippet anch
 	<a href="${1}">${2}</a>
 snippet img
 	<a href="${1}_large.${2:png}"><img src=$1_small.$2 alt="${3}" title="${4:$3}" /></a>
-
-	

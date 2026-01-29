@@ -1,0 +1,17 @@
+vo=gpu
+scale=ewa_lanczos
+scale-blur=0.981251
+# profile=gpu-hq
+hwdec=auto
+deband
+# video-sync=display-resample
+# interpolation
+sub-auto=fuzzy
+af=scaletempo2
+sub-font-size=12
+
+# scale=ewa_lanczossharp
+# cscale=ewa_lanczossharp
+# video-sync=display-resample
+# interpolation
+# tscale=oversample
