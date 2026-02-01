@@ -1,21 +1,22 @@
 [user]
-	email = geraud.le.falher@zalando.de
-	name = Géraud Le Falher
+    email = daureg@gmail.com
+    name = Géraud Le Falher
 [diff]
-	tool = gvimdiff
-	algorithm = histogram
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-	ui = true
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
 [merge]
-	tool = gvimdiff
-	conflictStyle = zdiff3
+    conflictStyle = zdiff3
 [core]
-	excludesfile = ~/.gitignore
-	autocrlf = input
-	pager = delta
+    autocrlf = input
+    pager = delta
+    commentchar = %
 
 [interactive]
     diffFilter = delta --color-only
@@ -29,36 +30,47 @@
     file-style = bold yellow ul
     file-decoration-style = none
 [push]
-	default = matching
+    default = simple
+    autoSetupRemote = true
 [alias]
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	uup = "!git remote update -p; git merge --ff-only @{u}"
+    nb = switch -c
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    uup = "!git remote update -p; git merge --ff-only @{u}"
 # http://gggritso.com/human-git-aliases
-	branches = branch -a
-	tags = tag
-	stashes = stash list
+    branches = branch -a
+    tags = tag
+    stashes = stash list
 
-	unstage = reset -q HEAD --
-	uncommit = reset --mixed HEAD~
-	amend = commit --amend
+    unstage = reset -q HEAD --
+    uncommit = reset --mixed HEAD~
+    amend = commit --amend
 
-	precommit = diff --cached --diff-algorithm=minimal -w
-	undo = "!f() { \\\n    git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; \\\n}; f"
-	up = pull --rebase --autostash
+    precommit = diff --cached --diff-algorithm=minimal -w
+    undo = "!f() { \\\n    git reset --hard $(git rev-parse --abbrev-ref HEAD)@{${1-1}}; \\\n}; f"
 [commit]
-	template = ~/.config/git_commit_template
-# [icdiff]
-# 	options =
-[url "git@github.bus.zalan.do:"]
-	insteadOf = https://github.bus.zalan.do
+    template = ~/.config/git_commit_template
 [fetch]
-	prune = true
-[hub]
-	host = github.bus.zalan.do
+    prune = true
+    all = true
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
 [init]
-	defaultBranch = main
+    defaultBranch = main
+[rerere]
+    enabled = true
+    autoupdate = true
+[column]
+    ui = auto
+[gpg]
+    format = ssh
+[branch]
+    sort = -committerdate
+[help]
+    autocorrect = prompt
+[tag]
+    sort = version:refname
+[blame]
+    date = iso
